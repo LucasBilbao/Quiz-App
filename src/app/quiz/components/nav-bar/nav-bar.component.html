@@ -7,9 +7,25 @@
   </mat-menu>
 
   <div class="nav-bar">
-    <button mat-raised-button [disabled]="true">Play the Game</button>
-    <button mat-raised-button>Create Questions</button>
-    <button mat-raised-button>History</button>
+    <button
+      routerLink="quiz"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      mat-raised-button
+    >
+      Play the Game
+    </button>
+    <button
+      routerLink="create-question"
+      routerLinkActive="active"
+      mat-raised-button
+    >
+      Create Questions
+    </button>
+
+    <button routerLink="history" routerLinkActive="active" mat-raised-button>
+      History
+    </button>
   </div>
   <app-authorization></app-authorization>
 </mat-card>
