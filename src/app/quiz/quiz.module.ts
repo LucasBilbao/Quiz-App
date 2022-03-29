@@ -4,5 +4,6 @@ import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [],
+  imports: [CommonModule, CoreModule  ],
 })
 export class QuizModule {}
