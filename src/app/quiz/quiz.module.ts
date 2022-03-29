@@ -4,7 +4,7 @@ import { CoreModule } from '../core/core.module';
 
 // Components
 import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
-import { StartGameComponent } from './components/start-game/start-game.component';
+import { StartQuizComponent } from './components/start-quiz/start-quiz.component';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
@@ -19,7 +19,7 @@ import { MatTreeModule } from '@angular/material/tree';
 @NgModule({
   declarations: [
     QuizPageComponent,
-    StartGameComponent,
+    StartQuizComponent,
     AuthorizationComponent,
     NavBarComponent,
   ],
