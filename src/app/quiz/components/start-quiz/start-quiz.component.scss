@@ -1,0 +1,14 @@
+.start-quiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.start-btn + .start-btn {
+  margin-left: 10px;
+}
