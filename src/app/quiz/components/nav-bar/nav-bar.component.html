@@ -1,0 +1,15 @@
+<mat-card class="nav-bar-card">
+  <button mat-button [matMenuTriggerFor]="menu" class="menu">Menu</button>
+  <mat-menu #menu="matMenu" class="my-menu" xPosition="before">
+    <button mat-menu-item disabled>Play the Game</button>
+    <button mat-menu-item>Create Questions</button>
+    <button mat-menu-item>History</button>
+  </mat-menu>
+
+  <div class="nav-bar">
+    <button mat-raised-button [disabled]="true">Play the Game</button>
+    <button mat-raised-button>Create Questions</button>
+    <button mat-raised-button>History</button>
+  </div>
+  <app-authorization></app-authorization>
+</mat-card>

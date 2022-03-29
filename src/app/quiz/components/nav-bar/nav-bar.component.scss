@@ -1,0 +1,35 @@
+.menu {
+  display: none;
+}
+
+.nav-bar-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  min-width: 500px;
+}
+
+@media screen and(max-width:760px) {
+  .nav-bar {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+  }
+}
+
+@media screen and(max-width:360px) {
+  .nav-bar-card {
+    flex-direction: column-reverse;
+  }
+
+  .menu {
+    margin-top: 2em !important;
+  }
+}
