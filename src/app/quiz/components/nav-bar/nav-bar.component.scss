@@ -2,6 +2,11 @@
   display: none;
 }
 
+.menu-item-btn.active {
+  color: rgba(0, 0, 0, 0.33) !important;
+  pointer-events: none !important;
+}
+
 .nav-bar-card {
   display: flex;
   justify-content: space-between;
@@ -12,6 +17,11 @@
   display: flex;
   justify-content: space-between;
   min-width: 500px;
+
+  .nav-bar-btn.active {
+    color: rgba(0, 0, 0, 0.33);
+    pointer-events: none;
+  }
 }
 
 @media screen and(max-width:760px) {
@@ -32,9 +42,4 @@
   .menu {
     margin-top: 2em !important;
   }
-}
-
-.active {
-  color: blue;
-  pointer-events: none;
 }

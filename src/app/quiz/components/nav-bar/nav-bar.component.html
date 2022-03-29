@@ -1,9 +1,31 @@
 <mat-card class="nav-bar-card">
   <button mat-button [matMenuTriggerFor]="menu" class="menu">Menu</button>
   <mat-menu #menu="matMenu" class="my-menu" xPosition="before">
-    <button mat-menu-item disabled>Play the Game</button>
-    <button mat-menu-item>Create Questions</button>
-    <button mat-menu-item>History</button>
+    <button
+      routerLink="quiz"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="menu-item-btn"
+      mat-menu-item
+    >
+      Play the Game
+    </button>
+    <button
+      routerLink="create-question"
+      routerLinkActive="active"
+      class="menu-item-btn"
+      mat-menu-item
+    >
+      Create Questions
+    </button>
+    <button
+      routerLink="history"
+      routerLinkActive="active"
+      class="menu-item-btn"
+      mat-menu-item
+    >
+      History
+    </button>
   </mat-menu>
 
   <div class="nav-bar">
@@ -12,18 +34,25 @@
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
       mat-raised-button
+      class="nav-bar-btn"
     >
       Play the Game
     </button>
     <button
       routerLink="create-question"
       routerLinkActive="active"
+      class="nav-bar-btn"
       mat-raised-button
     >
       Create Questions
     </button>
 
-    <button routerLink="history" routerLinkActive="active" mat-raised-button>
+    <button
+      routerLink="history"
+      routerLinkActive="active"
+      mat-raised-button
+      class="nav-bar-btn"
+    >
       History
     </button>
   </div>
