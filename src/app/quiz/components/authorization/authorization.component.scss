@@ -1,0 +1,19 @@
+.sign {
+  display: flex;
+  justify-content: space-between;
+  width: 13.5em;
+}
+
+@media screen and(max-width:360px) {
+  .sign {
+    flex-direction: column;
+  }
+
+  .sign-in + .sign-up {
+    margin-top: 2em;
+  }
+
+  .mat-menu-content {
+    width: 100%;
+  }
+}
