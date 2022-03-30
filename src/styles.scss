@@ -1,5 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
+.mat-accent {
+  background-color: #5298c7 !important;
+  color: #ffffff !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
