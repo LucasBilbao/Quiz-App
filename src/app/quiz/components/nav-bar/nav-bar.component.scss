@@ -2,11 +2,6 @@
   display: none;
 }
 
-.menu-item-btn.active {
-  color: rgba(0, 0, 0, 0.33) !important;
-  pointer-events: none !important;
-}
-
 .nav-bar-card {
   display: flex;
   justify-content: space-between;
@@ -37,9 +32,5 @@
 @media screen and(max-width:360px) {
   .nav-bar-card {
     flex-direction: column-reverse;
-  }
-
-  .menu {
-    margin-top: 2em !important;
   }
 }
