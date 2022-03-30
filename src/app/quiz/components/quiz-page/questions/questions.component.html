@@ -1,15 +1,34 @@
 <div class="wrapper">
   <mat-progress-spinner
     class="example-margin"
-    color="primary"
     mode="indeterminate"
     *ngIf="isLoading; else loaded"
   >
   </mat-progress-spinner>
 
   <ng-template #loaded>
-    <p>
-      {{ show() }}
-    </p>
+    <mat-card class="question-card">
+      <mat-card-title class="question">
+        <h1>
+          {{ question.question }}
+        </h1>
+      </mat-card-title>
+      <mat-card-content>
+        <div class="radio-group">
+          <div
+            class="radio"
+            *ngFor="let option of question.options; let i = index"
+            (click)="onOptionClick(i)"
+          >
+            <label class="container">
+              <div class="checkmark">
+                <div class="check" *ngIf="isChecked(i)"></div>
+              </div>
+              {{ option }}
+            </label>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </ng-template>
 </div>

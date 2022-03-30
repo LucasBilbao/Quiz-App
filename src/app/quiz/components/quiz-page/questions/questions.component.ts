@@ -9,8 +9,16 @@ import { QuizService } from '../../../services/quiz/quiz.service';
 })
 export class QuestionsComponent implements OnInit {
   questions: Question[] = [];
+  question: Question = {
+    id: 1,
+    question: 'What is the capital of France?',
+    answer: 'Paris',
+    options: ['Paris', 'Marseille', 'Lyon', 'Toulouse'],
+  };
 
-  isLoading: boolean = true;
+  indexChecked: number = -1;
+
+  isLoading: boolean = false;
 
   constructor(private quizServices: QuizService) {}
 
@@ -21,7 +29,11 @@ export class QuestionsComponent implements OnInit {
     });
   }
 
-  show(): string {
-    return JSON.stringify(this.questions, null, 2);
+  isChecked(index: number): boolean {
+    return this.indexChecked === index;
+  }
+
+  onOptionClick(index: number): void {
+    this.indexChecked = index;
   }
 }
