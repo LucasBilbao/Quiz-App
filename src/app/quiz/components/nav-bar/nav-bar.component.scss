@@ -6,6 +6,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
+  box-shadow: 0px 12px 12px 1px rgba(0, 0, 0, 0.1);
 }
 
 .nav-bar {
@@ -14,7 +16,7 @@
   min-width: 500px;
 
   .nav-bar-btn.active {
-    color: rgba(0, 0, 0, 0.33);
+    opacity: 0.33;
     pointer-events: none;
   }
 }
