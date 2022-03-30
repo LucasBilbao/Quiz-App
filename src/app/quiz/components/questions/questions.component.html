@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <mat-progress-spinner
+    class="example-margin"
+    color="primary"
+    mode="indeterminate"
+    *ngIf="isLoading; else loaded"
+  >
+  </mat-progress-spinner>
+
+  <ng-template #loaded>
+  </ng-template>
+</div>
