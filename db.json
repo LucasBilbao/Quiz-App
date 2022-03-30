@@ -1,0 +1,28 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the capital of France?",
+      "answer": "Paris",
+      "options": ["Paris", "Marseille", "Lyon", "Toulouse"]
+    },
+    {
+      "id": 2,
+      "question": "What is the capital of Germany?",
+      "answer": "Berlin",
+      "options": ["Munich", "Berlin", "Hamburg", "Frankfurt"]
+    },
+    {
+      "id": 3,
+      "question": "What is the capital of Italy?",
+      "answer": "Rome",
+      "options": ["Milan", "Naples", "Rome", "Turin"]
+    }
+  ],
+  "user": [
+    {
+      "name": "John",
+      "score": 0
+    }
+  ]
+}
