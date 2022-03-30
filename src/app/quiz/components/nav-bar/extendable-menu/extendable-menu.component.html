@@ -1,0 +1,30 @@
+<button mat-button [matMenuTriggerFor]="menu" class="menu" color="accent">
+  Menu
+</button>
+<mat-menu #menu="matMenu" class="my-menu" xPosition="before">
+  <button
+    routerLink="quiz"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="menu-item-btn"
+    mat-menu-item
+  >
+    Take quiz
+  </button>
+  <button
+    routerLink="create-question"
+    routerLinkActive="active"
+    class="menu-item-btn"
+    mat-menu-item
+  >
+    Create Questions
+  </button>
+  <button
+    routerLink="history"
+    routerLinkActive="active"
+    class="menu-item-btn"
+    mat-menu-item
+  >
+    History
+  </button>
+</mat-menu>
