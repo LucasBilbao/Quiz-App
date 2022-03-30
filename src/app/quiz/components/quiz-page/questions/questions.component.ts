@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Question } from '../../models/question.model';
-import { QuizService } from '../../services/quiz/quiz.service';
+import { Question } from '../../../models/question.model';
+import { QuizService } from '../../../services/quiz/quiz.service';
 
 @Component({
   selector: 'app-questions',
@@ -21,4 +21,7 @@ export class QuestionsComponent implements OnInit {
     });
   }
 
+  show(): string {
+    return JSON.stringify(this.questions, null, 2);
+  }
 }

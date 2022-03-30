@@ -4,11 +4,11 @@ import { CoreModule } from '../core/core.module';
 
 // Components
 import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
-import { StartQuizComponent } from './components/start-quiz/start-quiz.component';
-import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { StartQuizComponent } from './components/quiz-page/start-quiz/start-quiz.component';
+import { AuthorizationComponent } from './components/nav-bar/authorization/authorization.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ExtendableMenuComponent } from './components/nav-bar/extendable-menu/extendable-menu.component';
-import { QuestionsComponent } from './components/questions/questions.component';
+import { QuestionsComponent } from './components/quiz-page/questions/questions.component';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
