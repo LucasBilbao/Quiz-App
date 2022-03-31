@@ -72,4 +72,8 @@ export class QuestionCardComponent implements OnInit {
   updateScore(): void {
     if (this.isCorrectChecked()) this.quizServices.score += 1;
   }
+
+  isNextButtonDisabled(): boolean {
+    return this.indexChecked === -1 || this.isAnswerShown;
+  }
 }

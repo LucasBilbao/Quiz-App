@@ -19,7 +19,7 @@
       color="accent"
       class="next-btn"
       (click)="onNextClick()"
-      [disabled]="indexChecked === -1"
+      [disabled]="isNextButtonDisabled()"
     >
       Next
     </button>
