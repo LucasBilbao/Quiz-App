@@ -8,8 +8,25 @@
 
   <ng-template #loaded>
     <app-question-card
-      [question]="question"
+      [question]="questions[currentQuestionIndex]"
       class="question-card"
+      (nextQuestion)="onNextClick()"
+      *ngIf="!isGameOver; else gameOver"
     ></app-question-card>
+
+    <ng-template #gameOver>
+      <mat-card class="score-card">
+        <h1>
+          You have collected {{ getScore() }} /
+          {{ questions.length }}
+        </h1>
+        <h2 *ngIf="getScore() / questions.length >= 0.5; else tryAgain">
+          That is really good
+        </h2>
+        <ng-template #tryAgain>
+          <h2>You need to study more!</h2>
+        </ng-template>
+      </mat-card>
+    </ng-template>
   </ng-template>
 </div>

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Question } from 'src/app/quiz/models/question.model';
+import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 
 @Component({
   selector: 'app-question-card',
@@ -8,6 +9,7 @@ import { Question } from 'src/app/quiz/models/question.model';
 })
 export class QuestionCardComponent implements OnInit {
   @Input() question!: Question;
+  @Output() nextQuestion = new EventEmitter<void>();
 
   indexChecked: number = -1;
 
@@ -15,7 +17,7 @@ export class QuestionCardComponent implements OnInit {
 
   isQuestionChanging: boolean = false;
 
-  constructor() {}
+  constructor(private quizServices: QuizService) {}
 
   ngOnInit(): void {}
 
@@ -25,6 +27,10 @@ export class QuestionCardComponent implements OnInit {
     this.resetOptions();
 
     this.setQuestionChangeAnimation();
+
+    this.updateQuestion();
+
+    this.updateScore();
   }
 
   resetOptions(): void {
@@ -43,11 +49,27 @@ export class QuestionCardComponent implements OnInit {
     }, 2500);
   }
 
+  updateQuestion(): void {
+    setTimeout(() => {
+      this.nextQuestion.emit();
+    }, 4500);
+  }
+
   updateIndexChecked(index: number): void {
     this.indexChecked = index;
   }
 
   passCorrectIndex(): number {
     return this.question.options.indexOf(this.question.answer);
+  }
+
+  isCorrectChecked(): boolean {
+    return (
+      this.indexChecked === this.question.options.indexOf(this.question.answer)
+    );
+  }
+
+  updateScore(): void {
+    if (this.isCorrectChecked()) this.quizServices.score += 1;
   }
 }

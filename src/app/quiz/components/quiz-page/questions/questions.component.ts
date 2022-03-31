@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Question } from '../../../models/question.model';
 import { QuizService } from '../../../services/quiz/quiz.service';
 
@@ -9,21 +10,40 @@ import { QuizService } from '../../../services/quiz/quiz.service';
 })
 export class QuestionsComponent implements OnInit {
   questions: Question[] = [];
-  question: Question = {
-    id: 1,
-    question: 'What is the capital of France?',
-    answer: 'Paris',
-    options: ['Paris', 'Marseille', 'Lyon', 'Toulouse'],
-  };
 
-  isLoading: boolean = false;
+  currentQuestionIndex: number = 0;
 
-  constructor(private quizServices: QuizService) {}
+  isLoading: boolean = true;
+
+  isGameOver: boolean = false;
+
+  constructor(private quizServices: QuizService, private router: Router) {}
 
   ngOnInit(): void {
     this.quizServices.fetchQuestions().then((questions) => {
-      this.questions = questions;
+      this.questions = this.quizServices.getShuffledQuestions();
       this.isLoading = false;
     });
+  }
+
+  onNextClick(): void {
+    if (this.currentQuestionIndex !== this.questions.length - 1) {
+      this.currentQuestionIndex += 1;
+    } else {
+      this.currentQuestionIndex = 0;
+      this.gameOver();
+    }
+  }
+
+  getScore(): number {
+    return this.quizServices.score;
+  }
+
+  gameOver(): void {
+    this.isGameOver = true;
+    setTimeout(() => {
+      this.quizServices.score = 0;
+      this.router.navigate(['/quiz']);
+    }, 5000);
   }
 }

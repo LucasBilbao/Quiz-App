@@ -11,12 +11,13 @@ export class QuizService {
 
   questions: Question[] = [];
 
+  score: number = 0;
+
   constructor(private http: HttpClient) {}
 
   async fetchQuestions(): Promise<Question[]> {
     this.http.get<Question[]>(this.url).subscribe((questions) => {
       this.questions = questions;
-      // console.log(this.questions);
     });
 
     return new Promise((res) => {
@@ -24,5 +25,9 @@ export class QuizService {
         res(this.questions);
       }, 2500);
     });
+  }
+
+  getShuffledQuestions(): Question[] {
+    return this.questions.sort(() => Math.random() - 0.5);
   }
 }
