@@ -1,0 +1,22 @@
+<mat-card class="question-card">
+  <mat-card-title class="question">
+    <h1>
+      {{ question.question }}
+    </h1>
+  </mat-card-title>
+  <mat-card-content>
+    <app-options [options]="question.options"></app-options>
+    
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <button
+      mat-raised-button
+      color="accent"
+      class="next-btn"
+      (click)="onNextClick()"
+      [disabled]="indexChecked === -1"
+    >
+      Next
+    </button>
+  </mat-card-actions>
+</mat-card>
