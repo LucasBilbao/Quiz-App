@@ -11,11 +11,30 @@ export class QuestionCardComponent implements OnInit {
 
   indexChecked: number = -1;
 
+  isAnswerShown: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}
 
   onNextClick(): void {
-    this.indexChecked = -1;
+    this.isAnswerShown = true;
+
+    this.resetOptions();
+  }
+
+  resetOptions(): void {
+    setTimeout(() => {
+      this.isAnswerShown = false;
+      this.indexChecked = -1;
+    }, 2500);
+  }
+
+  updateIndexChecked(index: number): void {
+    this.indexChecked = index;
+  }
+
+  passCorrectIndex(): number {
+    return this.question.options.indexOf(this.question.answer);
   }
 }

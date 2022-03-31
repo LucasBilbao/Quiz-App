@@ -17,9 +17,7 @@
     display: flex;
     align-items: center;
 
-    background-color: rgba(0, 0, 0, 0.08);
-
-    outline: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgb(211 223 231);
 
     border-radius: 20px;
 
@@ -61,5 +59,13 @@
         }
       }
     }
+  }
+
+  .radio.correct {
+    background-color: #86d7b0;
+  }
+
+  .radio.incorrect {
+    background-color: #f68b8b;
   }
 }

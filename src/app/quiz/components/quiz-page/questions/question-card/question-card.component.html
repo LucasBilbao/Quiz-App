@@ -5,8 +5,13 @@
     </h1>
   </mat-card-title>
   <mat-card-content>
-    <app-options [options]="question.options"></app-options>
-    
+    <app-options
+      [options]="question.options"
+      [indexChecked]="indexChecked"
+      [correctIndex]="question.options.indexOf(question.answer)"
+      [isAnswerShown]="isAnswerShown"
+      (optionClicked)="updateIndexChecked($event)"
+    ></app-options>
   </mat-card-content>
   <mat-card-actions class="actions">
     <button

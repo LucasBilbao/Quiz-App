@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-options',
@@ -7,8 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class OptionsComponent implements OnInit {
   @Input() options: string[] = [];
+  @Input() indexChecked: number = -1;
+  @Input() correctIndex: number = -1;
+  @Input() isAnswerShown: boolean = false;
 
-  indexChecked: number = -1;
+  @Output() optionClicked = new EventEmitter<number>();
 
   constructor() {}
 
@@ -16,9 +19,30 @@ export class OptionsComponent implements OnInit {
 
   onOptionClick(index: number): void {
     this.indexChecked = index;
+    this.optionClicked.emit(index);
   }
 
   isChecked(index: number): boolean {
+    return this.indexChecked === index;
+  }
+
+  isCorrect(index: number): boolean {
+    return this.isCorrectSelected(index) && this.isAnswerShown;
+  }
+
+  isIncorrect(index: number): boolean {
+    return (
+      !this.isCorrectSelected(index) &&
+      this.isSelected(index) &&
+      this.isAnswerShown
+    );
+  }
+
+  isCorrectSelected(index: number): boolean {
+    return this.correctIndex === index;
+  }
+
+  isSelected(index: number): boolean {
     return this.indexChecked === index;
   }
 }

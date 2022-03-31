@@ -1,6 +1,8 @@
 <div class="radio-group">
   <div
     class="radio"
+    [class.correct]="isCorrect(i)"
+    [class.incorrect]="isIncorrect(i)"
     *ngFor="let option of options; let i = index"
     (click)="onOptionClick(i)"
   >
