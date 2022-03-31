@@ -16,8 +16,6 @@ export class QuestionsComponent implements OnInit {
     options: ['Paris', 'Marseille', 'Lyon', 'Toulouse'],
   };
 
-  indexChecked: number = -1;
-
   isLoading: boolean = false;
 
   constructor(private quizServices: QuizService) {}
@@ -27,13 +25,5 @@ export class QuestionsComponent implements OnInit {
       this.questions = questions;
       this.isLoading = false;
     });
-  }
-
-  isChecked(index: number): boolean {
-    return this.indexChecked === index;
-  }
-
-  onOptionClick(index: number): void {
-    this.indexChecked = index;
   }
 }
