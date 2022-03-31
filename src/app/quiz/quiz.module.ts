@@ -18,6 +18,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { QuestionCardComponent } from './components/quiz-page/questions/question-card/question-card.component';
+import { OptionsComponent } from './components/quiz-page/questions/question-card/options/options.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NavBarComponent,
     ExtendableMenuComponent,
     QuestionsComponent,
+    QuestionCardComponent,
+    OptionsComponent,
   ],
   imports: [
     CommonModule,
