@@ -13,6 +13,8 @@ export class QuestionCardComponent implements OnInit {
 
   isAnswerShown: boolean = false;
 
+  isQuestionChanging: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -21,12 +23,23 @@ export class QuestionCardComponent implements OnInit {
     this.isAnswerShown = true;
 
     this.resetOptions();
+
+    this.setQuestionChangeAnimation();
   }
 
   resetOptions(): void {
     setTimeout(() => {
       this.isAnswerShown = false;
       this.indexChecked = -1;
+    }, 4000);
+  }
+
+  setQuestionChangeAnimation(): void {
+    setTimeout(() => {
+      this.isQuestionChanging = true;
+      setTimeout(() => {
+        this.isQuestionChanging = false;
+      }, 3100);
     }, 2500);
   }
 
