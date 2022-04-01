@@ -9,6 +9,10 @@ import { AuthorizationComponent } from './components/nav-bar/authorization/autho
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ExtendableMenuComponent } from './components/nav-bar/extendable-menu/extendable-menu.component';
 import { QuestionsComponent } from './components/quiz-page/questions/questions.component';
+import { QuestionCardComponent } from './components/quiz-page/questions/question-card/question-card.component';
+import { OptionsComponent } from './components/quiz-page/questions/question-card/options/options.component';
+import { CreateQuestionComponent } from './components/quiz-page/create-question/create-question.component';
+import { CreateQuestionCardComponent } from './components/quiz-page/create-question/create-question-card/create-question-card.component';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -18,8 +22,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { QuestionCardComponent } from './components/quiz-page/questions/question-card/question-card.component';
-import { OptionsComponent } from './components/quiz-page/questions/question-card/options/options.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,8 @@ import { OptionsComponent } from './components/quiz-page/questions/question-card
     QuestionsComponent,
     QuestionCardComponent,
     OptionsComponent,
+    CreateQuestionComponent,
+    CreateQuestionCardComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +48,8 @@ import { OptionsComponent } from './components/quiz-page/questions/question-card
     MatIconModule,
     MatTreeModule,
     MatProgressSpinnerModule,
+    MatInputModule,
+    MatRadioModule,
   ],
   exports: [QuizPageComponent],
 })
