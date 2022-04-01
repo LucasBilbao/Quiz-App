@@ -1,0 +1,13 @@
+.question-creator-wrapper {
+  display: flex;
+  justify-content: space-around;
+
+  width: 100%;
+  height: auto;
+}
+
+@media screen and(max-width: 430px) {
+  .question-creator-wrapper {
+    justify-content: flex-start;
+  }
+}
