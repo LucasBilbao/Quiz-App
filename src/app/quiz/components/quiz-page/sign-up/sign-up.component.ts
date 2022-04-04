@@ -1,3 +1,4 @@
+import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,10 +26,17 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
+    const isUsernameTaken: boolean = await this.userService
+      .isUsernameRegistered(this.usernameFormControl.value)
+      .then((data) => data);
+
     if (
-      this.passwordFormControl.value === this.repeatPasswordFormControl.value
+      this.usernameFormControl.valid &&
+      this.passwordFormControl.value === this.repeatPasswordFormControl.value &&
+      !isUsernameTaken
     ) {
+      console.log('here');
       this.userService.register({
         username: this.usernameFormControl.value,
         password: this.passwordFormControl.value,
