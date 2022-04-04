@@ -6,7 +6,7 @@
         type="username"
         matInput
         [formControl]="usernameFormControl"
-        placeholder="Ex. pat@example.com"
+        placeholder="Ex. JohnDoe"
         autocomplete="off"
       />
       <mat-hint>Errors appear instantly!</mat-hint>
@@ -22,6 +22,7 @@
         Username is <strong>required</strong>
       </mat-error>
     </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Enter new password</mat-label>
       <input
@@ -42,6 +43,7 @@
         }}</mat-icon>
       </button>
     </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Repeat password</mat-label>
       <input
