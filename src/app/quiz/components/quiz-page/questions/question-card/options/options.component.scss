@@ -68,4 +68,8 @@
   .radio.incorrect {
     background-color: #f68b8b;
   }
+
+  .radio.disabled-option {
+    pointer-events: none;
+  }
 }

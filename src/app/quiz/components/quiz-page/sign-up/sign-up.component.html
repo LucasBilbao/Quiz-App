@@ -1,0 +1,68 @@
+<div class="sign-up-wrapper">
+  <form class="example-form" action="submit" (submit)="onSubmit()">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input
+        type="username"
+        matInput
+        [formControl]="usernameFormControl"
+        placeholder="Ex. pat@example.com"
+        autocomplete="off"
+      />
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error
+        *ngIf="
+          usernameFormControl.hasError('email') &&
+          !usernameFormControl.hasError('required')
+        "
+      >
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="usernameFormControl.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter new password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        autocomplete="off"
+        [formControl]="passwordFormControl"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Repeat password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        autocomplete="off"
+        [formControl]="repeatPasswordFormControl"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button type="submit" mat-button color="accent">Register</button>
+  </form>
+</div>

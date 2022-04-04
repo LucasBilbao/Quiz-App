@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/quiz/services/user/user.service';
 
 @Component({
   selector: 'app-start-quiz',
@@ -7,12 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./start-quiz.component.scss'],
 })
 export class StartQuizComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
-  ngOnInit(): void {}
-
-  startQuiz() {
-    this.router.navigate(['/quiz', 'question', 1]);
-    console.log('start quiz');
+  ngOnInit(): void {
+    if (!this.userService.isSignedIn) {
+      this.router.navigate(['/sign-up']);
+    }
   }
+
+  startQuiz() {}
 }

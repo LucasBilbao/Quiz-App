@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
+import { UserService } from 'src/app/quiz/services/user/user.service';
 
 @Component({
   selector: 'app-create-question-card',
@@ -15,7 +16,11 @@ export class CreateQuestionCardComponent implements OnInit {
 
   options: string[] = ['', ''];
 
-  constructor(private quizServices: QuizService, private router: Router) {}
+  constructor(
+    private quizServices: QuizService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.question = {
@@ -51,6 +56,8 @@ export class CreateQuestionCardComponent implements OnInit {
 
   postQuestion(): void {
     this.quizServices.postNewQuestion(this.question).subscribe();
+
+    this.userService.putQuestion(this.question.id);
 
     this.router.navigate(['/quiz']);
   }

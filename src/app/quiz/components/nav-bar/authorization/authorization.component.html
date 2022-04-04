@@ -1,4 +1,4 @@
-<div class="sign">
+<div class="sign" *ngIf="!isSignedIn; else profile">
   <button
     routerLink="sign-in"
     routerLinkActive="active"
@@ -17,3 +17,13 @@
     Sign up
   </button>
 </div>
+
+<ng-template #profile>
+  <button
+    mat-fab
+    color="accent"
+    aria-label="Example icon button with a delete icon"
+  >
+    <mat-icon>person</mat-icon>
+  </button>
+</ng-template>

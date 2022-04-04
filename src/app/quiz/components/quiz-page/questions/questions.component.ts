@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/quiz/services/user/user.service';
 import { Question } from '../../../models/question.model';
 import { QuizService } from '../../../services/quiz/quiz.service';
 
@@ -17,9 +18,17 @@ export class QuestionsComponent implements OnInit {
 
   isGameOver: boolean = false;
 
-  constructor(private quizServices: QuizService, private router: Router) {}
+  constructor(
+    private quizServices: QuizService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
+    if (!this.userService.isSignedIn) {
+      this.router.navigate(['/sign-up']);
+    }
+
     this.quizServices.fetchQuestions().then((questions) => {
       this.questions = this.quizServices.getShuffledQuestions();
       this.isLoading = false;
@@ -45,5 +54,7 @@ export class QuestionsComponent implements OnInit {
       this.quizServices.score = 0;
       this.router.navigate(['/quiz']);
     }, 5000);
+
+    this.userService.putScore(`${this.getScore()}/${this.questions.length}`);
   }
 }

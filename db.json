@@ -1,39 +1,56 @@
 {
   "questions": [
     {
-      "id": "1",
+      "id": "5984327439572",
       "question": "What is the capital of France?",
       "answer": "Paris",
       "options": ["Paris", "Marseille", "Lyon", "Toulouse"]
     },
     {
-      "id": "2",
+      "id": "8947315975423",
       "question": "What is the capital of Germany?",
       "answer": "Berlin",
       "options": ["Munich", "Berlin", "Hamburg", "Frankfurt"]
     },
     {
-      "id": "3",
-      "question": "What is the capital of Italy?",
-      "answer": "Rome",
-      "options": ["Milan", "Naples", "Rome", "Turin"]
-    },
-    {
-      "id": "1648815991503",
-      "question": "What color is the sky?",
+      "id": "1649070518773",
+      "question": "What color is the sky",
       "answer": "Blue",
-      "options": ["Blue", "Yellow", "Red"]
-    },
-    {
-      "id": "1648816189335",
-      "question": "Where does pizza come from?",
-      "answer": "Italy",
-      "options": ["Greece", "France", "Italy", "USA", "India"]
+      "options": ["Blue", "Yellow", "Green"]
     }
   ],
-  "user": [
+  "users": [
     {
-      "name": "John"
+      "id": "1649061341572",
+      "userCredentials": {
+        "username": "LucasBilbao",
+        "password": "lukas865287"
+      },
+      "scoreHistory": [],
+      "myQuestions": []
+    },
+    {
+      "id": "1649067250921",
+      "userCredentials": {
+        "username": "vfdsvfdsvfldjvn",
+        "password": "vfsvfdfdvfd"
+      },
+      "scoreHistory": [],
+      "myQuestions": []
+    },
+    {
+      "id": "1649069145173",
+      "userCredentials": {
+        "username": "Lucas.Bilbao",
+        "password": "lukas865287"
+      },
+      "scoreHistory": [
+        {
+          "score": "2/2",
+          "date": "2022-04-04T10:59:45.581Z"
+        }
+      ],
+      "myQuestions": ["1649070518773"]
     }
   ]
 }

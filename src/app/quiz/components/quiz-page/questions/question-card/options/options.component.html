@@ -5,6 +5,7 @@
     [class.incorrect]="isIncorrect(i)"
     *ngFor="let option of options; let i = index"
     (click)="onOptionClick(i)"
+    [class.disabled-option]="isAnswerShown"
   >
     <label class="container">
       <div class="checkmark">
