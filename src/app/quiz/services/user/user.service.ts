@@ -87,4 +87,19 @@ export class UserService {
       })
       .subscribe((user) => {});
   }
+
+  async isUsernameRegistered(username: string): Promise<boolean> {
+    let isUsernameTaken: any;
+    this.http
+      .get<User[]>(`${this.url}?userCredentials.username=${username}`)
+      .subscribe((res) => {
+        isUsernameTaken = res.length !== 0;
+      });
+
+    return new Promise((res) => {
+      setTimeout(() => {
+        res(isUsernameTaken);
+      }, 500);
+    });
+  }
 }
