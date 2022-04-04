@@ -4,62 +4,36 @@
       "id": "1",
       "question": "What is the capital of France?",
       "answer": "Paris",
-      "options": [
-        "Paris",
-        "Marseille",
-        "Lyon",
-        "Toulouse"
-      ]
+      "options": ["Paris", "Marseille", "Lyon", "Toulouse"]
     },
     {
       "id": "2",
       "question": "What is the capital of Germany?",
       "answer": "Berlin",
-      "options": [
-        "Munich",
-        "Berlin",
-        "Hamburg",
-        "Frankfurt"
-      ]
+      "options": ["Munich", "Berlin", "Hamburg", "Frankfurt"]
     },
     {
       "id": "3",
       "question": "What is the capital of Italy?",
       "answer": "Rome",
-      "options": [
-        "Milan",
-        "Naples",
-        "Rome",
-        "Turin"
-      ]
+      "options": ["Milan", "Naples", "Rome", "Turin"]
     },
     {
       "id": "1648815991503",
       "question": "What color is the sky?",
       "answer": "Blue",
-      "options": [
-        "Blue",
-        "Yellow",
-        "Red"
-      ]
+      "options": ["Blue", "Yellow", "Red"]
     },
     {
       "id": "1648816189335",
       "question": "Where does pizza come from?",
       "answer": "Italy",
-      "options": [
-        "Greece",
-        "France",
-        "Italy",
-        "USA",
-        "India"
-      ]
+      "options": ["Greece", "France", "Italy", "USA", "India"]
     }
   ],
   "user": [
     {
-      "name": "John",
-      "score": 0
+      "name": "John"
     }
   ]
 }

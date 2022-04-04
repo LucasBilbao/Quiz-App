@@ -13,10 +13,7 @@ export class CreateQuestionCardComponent implements OnInit {
 
   questionString: string = '';
 
-  options: any = {
-    0: '',
-    1: '',
-  };
+  options: string[] = ['', ''];
 
   constructor(private quizServices: QuizService, private router: Router) {}
 
@@ -31,28 +28,21 @@ export class CreateQuestionCardComponent implements OnInit {
 
   addOption(): void {
     this.question.options.push('');
-    this.options[this.question.options.length - 1] = '';
+    this.options.push('');
   }
 
-  updateOptions(index: number): void {
-    this.question.options[index] = this.options[index];
+  onUpdateOption(optionInfo: any): void {
+    this.question.options[optionInfo.index] = optionInfo.option;
   }
 
   clearOption(index: number): void {
     this.options[index] = '';
-    this.updateOptions(index);
+    this.onUpdateOption({ index, option: '' });
   }
 
-  deleteOption(index: number): void {
-    this.updateOptionsObjectFrom(index);
+  onDeleteOption(index: number): void {
     this.question.options.splice(index, 1);
-  }
-
-  updateOptionsObjectFrom(index: number): void {
-    for (let i = index; i < this.question.options.length; i++) {
-      this.options[i] = this.options[i + 1];
-    }
-    delete this.options[this.question.options.length - 1];
+    this.options = this.question.options;
   }
 
   updateCorrectAnswer(index: number): void {

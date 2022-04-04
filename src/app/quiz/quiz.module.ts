@@ -24,6 +24,8 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { SignUpComponent } from './components/quiz-page/sign-up/sign-up.component';
+import { OptionCreatorComponent } from './components/quiz-page/create-question/create-question-card/option-creator/option-creator.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { MatRadioModule } from '@angular/material/radio';
     OptionsComponent,
     CreateQuestionComponent,
     CreateQuestionCardComponent,
+    SignUpComponent,
+    OptionCreatorComponent,
   ],
   imports: [
     CommonModule,
