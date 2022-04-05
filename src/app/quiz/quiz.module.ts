@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from '../core/core.module';
 
 // Components
 import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
@@ -29,6 +28,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
+
+// My Modules
+import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatRadioModule,
     MatTableModule,
+    SharedModule,
   ],
   exports: [QuizPageComponent],
 })

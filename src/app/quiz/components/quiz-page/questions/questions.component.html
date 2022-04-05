@@ -1,10 +1,5 @@
 <div class="question-wrapper">
-  <mat-progress-spinner
-    class="example-margin"
-    mode="indeterminate"
-    *ngIf="isLoading; else loaded"
-  >
-  </mat-progress-spinner>
+  <app-loader *ngIf="isLoading; else loaded"> </app-loader>
 
   <ng-template #loaded>
     <app-question-card
