@@ -18,5 +18,4 @@ export class AuthorizationComponent implements OnInit {
   logOut(): void {
     this.userService.onLogOut();
   }
-
 }
