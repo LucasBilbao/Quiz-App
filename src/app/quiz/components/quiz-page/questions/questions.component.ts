@@ -26,7 +26,7 @@ export class QuestionsComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.userService.isSignedIn) {
-      this.router.navigate(['/sign-up']);
+      this.router.navigate(['/sign-in']);
     }
 
     this.quizServices.fetchQuestions().then((questions) => {
@@ -55,6 +55,6 @@ export class QuestionsComponent implements OnInit {
       this.router.navigate(['/quiz']);
     }, 5000);
 
-    this.userService.putScore(`${this.getScore()}/${this.questions.length}`);
+    this.userService.putScore(this.getScore(), this.questions.length);
   }
 }

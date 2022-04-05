@@ -23,7 +23,11 @@
     mat-fab
     color="accent"
     aria-label="Example icon button with a delete icon"
+    [matMenuTriggerFor]="profileMenu"
   >
     <mat-icon>person</mat-icon>
   </button>
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item (click)="logOut()">Log Out</button>
+  </mat-menu>
 </ng-template>

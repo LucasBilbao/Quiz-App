@@ -57,6 +57,14 @@ export class UserService {
       });
   }
 
+  onLogOut(): void {
+    localStorage.setItem('isSignedIn', 'false');
+    this.setIsSignedWithStorage();
+    localStorage.removeItem('userID');
+    this.user = {} as User;
+    location.reload();
+  }
+
   signIn(user: User): void {
     localStorage.setItem('isSignedIn', 'true');
 
@@ -78,9 +86,8 @@ export class UserService {
     this.isSignedIn = localStorage.getItem('isSignedIn') === 'true';
   }
 
-  putScore(score: string): void {
-    this.user.scoreHistory.push({ score, date: new Date() });
-    console.log(this.user.scoreHistory);
+  putScore(score: number, maxScore: number): void {
+    this.user.scoreHistory.unshift({ score, maxScore, date: new Date() });
     this.http
       .put(`${this.url}/${this.user.id}`, {
         ...this.user,
@@ -89,16 +96,22 @@ export class UserService {
       .subscribe((user) => {});
   }
 
-  fetchUserByID(): void {
+  fetchUserByID(): Promise<User> {
     this.http
       .get(`${this.url}/${localStorage.getItem('userID')}`)
       .subscribe((user) => {
         this.user = user as User;
       });
+
+    return new Promise((res) => {
+      setTimeout(() => {
+        res(this.user);
+      }, 500);
+    });
   }
 
   putQuestion(questionID: string): void {
-    this.user.myQuestions.push(questionID);
+    this.user.myQuestions.unshift(questionID);
     this.http
       .put(`${this.url}/${this.user.id}`, {
         ...this.user,

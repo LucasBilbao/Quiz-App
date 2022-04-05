@@ -31,6 +31,26 @@
         "Yellow",
         "Green"
       ]
+    },
+    {
+      "id": "1649139920133",
+      "question": "Birds lay eggs.",
+      "answer": "True",
+      "options": [
+        "True",
+        "False",
+        "Sometimes"
+      ]
+    },
+    {
+      "id": "1649146923746",
+      "question": "The Earth is flat.",
+      "answer": "False",
+      "options": [
+        "True",
+        "False",
+        "It depends on the season"
+      ]
     }
   ],
   "users": [
@@ -40,8 +60,32 @@
         "username": "LucasBilbao",
         "password": "lukas123456"
       },
-      "scoreHistory": [],
-      "myQuestions": []
+      "scoreHistory": [
+        {
+          "score": 3,
+          "maxScore": 5,
+          "date": "2022-04-05T08:24:02.296Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 4,
+          "date": "2022-04-05T08:18:03.902Z"
+        },
+        {
+          "score": 3,
+          "maxScore": 4,
+          "date": "2022-04-05T08:14:57.919Z"
+        },
+        {
+          "score": 4,
+          "maxScore": 4,
+          "date": "2022-04-05T06:39:35.110Z"
+        }
+      ],
+      "myQuestions": [
+        "1649146923746",
+        "1649139920133"
+      ]
     },
     {
       "id": "1649067250921",
@@ -58,12 +102,7 @@
         "username": "Lucas.Bilbao",
         "password": "lukas123456"
       },
-      "scoreHistory": [
-        {
-          "score": "2/2",
-          "date": "2022-04-04T10:59:45.581Z"
-        }
-      ],
+      "scoreHistory": [],
       "myQuestions": [
         "1649070518773"
       ]

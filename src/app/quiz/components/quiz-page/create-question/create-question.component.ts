@@ -12,7 +12,7 @@ export class CreateQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.userService.isSignedIn) {
-      this.router.navigate(['/sign-up']);
+      this.router.navigate(['/sign-in']);
     }
   }
 }

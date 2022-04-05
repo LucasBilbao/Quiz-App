@@ -14,4 +14,9 @@ export class AuthorizationComponent implements OnInit {
   ngOnInit(): void {
     this.isSignedIn = this.userService.isSignedIn;
   }
+
+  logOut(): void {
+    this.userService.onLogOut();
+  }
+
 }

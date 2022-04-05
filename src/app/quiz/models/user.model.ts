@@ -8,7 +8,8 @@ export interface User {
 }
 
 export interface ScoreInfo {
-  score: string;
+  score: number;
+  maxScore: number;
   date: Date;
 }
 
