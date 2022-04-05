@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
       !isUsernameTaken
     ) {
       console.log('here');
-      this.userService.register({
+      this.userService.onRegister({
         username: this.usernameFormControl.value,
         password: this.passwordFormControl.value,
       });

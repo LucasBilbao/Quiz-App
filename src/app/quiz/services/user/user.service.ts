@@ -25,7 +25,7 @@ export class UserService {
     }
   }
 
-  register(userCredentials: UserCredentials): void {
+  onRegister(userCredentials: UserCredentials): void {
     const userInfo: User = {
       id: this.getUniqueID(),
       userCredentials,
@@ -36,6 +36,25 @@ export class UserService {
     this.http.post(this.url, userInfo).subscribe((user) => {
       this.signIn(user as User);
     });
+  }
+
+  async onSignIn(signInCredentials: UserCredentials): Promise<void> {
+    this.http
+      .get<User[]>(
+        `${this.url}?userCredentials.username=${signInCredentials.username}`
+      )
+      .subscribe((res) => {
+        if (res.length !== 0) {
+          res.forEach((user) => {
+            if (
+              user.userCredentials.password === signInCredentials.password &&
+              user.userCredentials.username === signInCredentials.username
+            ) {
+              this.signIn(user);
+            }
+          });
+        }
+      });
   }
 
   signIn(user: User): void {

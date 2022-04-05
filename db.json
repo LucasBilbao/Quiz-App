@@ -4,19 +4,33 @@
       "id": "5984327439572",
       "question": "What is the capital of France?",
       "answer": "Paris",
-      "options": ["Paris", "Marseille", "Lyon", "Toulouse"]
+      "options": [
+        "Paris",
+        "Marseille",
+        "Lyon",
+        "Toulouse"
+      ]
     },
     {
       "id": "8947315975423",
       "question": "What is the capital of Germany?",
       "answer": "Berlin",
-      "options": ["Munich", "Berlin", "Hamburg", "Frankfurt"]
+      "options": [
+        "Munich",
+        "Berlin",
+        "Hamburg",
+        "Frankfurt"
+      ]
     },
     {
       "id": "1649070518773",
       "question": "What color is the sky",
       "answer": "Blue",
-      "options": ["Blue", "Yellow", "Green"]
+      "options": [
+        "Blue",
+        "Yellow",
+        "Green"
+      ]
     }
   ],
   "users": [
@@ -50,7 +64,18 @@
           "date": "2022-04-04T10:59:45.581Z"
         }
       ],
-      "myQuestions": ["1649070518773"]
+      "myQuestions": [
+        "1649070518773"
+      ]
+    },
+    {
+      "id": "1649078955524",
+      "userCredentials": {
+        "username": "Lucas.BIlbao1",
+        "password": "lukas123456"
+      },
+      "scoreHistory": [],
+      "myQuestions": []
     }
   ]
 }

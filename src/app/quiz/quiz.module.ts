@@ -26,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { SignUpComponent } from './components/quiz-page/sign-up/sign-up.component';
 import { OptionCreatorComponent } from './components/quiz-page/create-question/create-question-card/option-creator/option-creator.component';
+import { SignInComponent } from './components/quiz-page/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { OptionCreatorComponent } from './components/quiz-page/create-question/c
     CreateQuestionCardComponent,
     SignUpComponent,
     OptionCreatorComponent,
+    SignInComponent,
   ],
   imports: [
     CommonModule,
