@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 
@@ -7,7 +7,7 @@ import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
   templateUrl: './question-card.component.html',
   styleUrls: ['./question-card.component.scss'],
 })
-export class QuestionCardComponent implements OnInit {
+export class QuestionCardComponent {
   @Input() question!: Question;
   @Output() nextQuestion = new EventEmitter<void>();
 
@@ -18,8 +18,6 @@ export class QuestionCardComponent implements OnInit {
   isQuestionChanging: boolean = false;
 
   constructor(private quizServices: QuizService) {}
-
-  ngOnInit(): void {}
 
   onNextClick(): void {
     this.isAnswerShown = true;

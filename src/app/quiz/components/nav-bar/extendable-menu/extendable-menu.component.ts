@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-extendable-menu',
   templateUrl: './extendable-menu.component.html',
-  styleUrls: ['./extendable-menu.component.scss']
+  styleUrls: ['./extendable-menu.component.scss'],
 })
-export class ExtendableMenuComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class ExtendableMenuComponent {}

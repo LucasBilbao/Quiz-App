@@ -15,6 +15,4 @@ export class StartQuizComponent implements OnInit {
       this.router.navigate(['/sign-in']);
     }
   }
-
-  startQuiz() {}
 }
