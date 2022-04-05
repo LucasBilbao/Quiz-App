@@ -19,14 +19,17 @@ export class HistoryComponent implements OnInit {
   ngOnInit(): void {
     if (!this.userService.isSignedIn) {
       this.router.navigate(['/sign-in']);
+    } else {
+      if (!this.userService.user) {
+        this.userService.fetchUserByID().then((user) => {
+          this.scoreHistory = user.scoreHistory;
+          this.isLoading = false;
+        });
+      } else {
+        this.scoreHistory = this.userService.user.scoreHistory;
+        this.isLoading = false;
+      }
     }
-
-    this.userService.fetchUserByID().then(() => {});
-
-    setTimeout(() => {
-      this.scoreHistory = this.userService.user.scoreHistory;
-      this.isLoading = false;
-    }, 2500);
   }
 
   getPercentage(score: number, maxScore: number): number {
