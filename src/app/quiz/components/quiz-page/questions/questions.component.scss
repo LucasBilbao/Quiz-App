@@ -36,6 +36,12 @@
     height: 20px;
     border-radius: 50%;
     background-color: #ffffffa0;
+
+    transition: all 0.5s ease-in-out;
+  }
+
+  .question-circle.active {
+    transform: scale(150%) translateY(-10px);
   }
 
   .question-circle.correct {

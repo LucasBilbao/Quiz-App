@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
+import { slide } from 'src/app/quiz/animations/slide.trigger';
 
 @Component({
   selector: 'app-question-card',
   templateUrl: './question-card.component.html',
   styleUrls: ['./question-card.component.scss'],
+  animations: [slide],
 })
 export class QuestionCardComponent {
   @Input() question!: Question;

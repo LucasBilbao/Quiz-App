@@ -1,4 +1,7 @@
-<mat-card class="question-card" [class.change-question]="isQuestionChanging">
+<mat-card
+  class="question-card"
+  [@slide]="isQuestionChanging ? 'slideInAndOut' : ''"
+>
   <mat-card-title class="question">
     <h1>
       {{ question.question }}

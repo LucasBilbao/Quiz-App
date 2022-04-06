@@ -9,6 +9,7 @@
           *ngFor="let _ of questions; let i = index"
           [class.correct]="progress[i] && progress[i] !== undefined"
           [class.incorrect]="!progress[i] && progress[i] !== undefined"
+          [class.active]="i === currentQuestionIndex"
         ></div>
       </div>
 

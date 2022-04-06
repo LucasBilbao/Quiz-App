@@ -2,8 +2,9 @@
   <div
     class="radio"
     [class.correct]="isCorrect(i)"
+    [@shake]="isCorrect(i) ? 'trueShake' : ''"
     [class.incorrect]="isIncorrect(i)"
-    [@shake]="isIncorrect(i) ? 'shaken' : ''"
+    [@shake]="isIncorrect(i) ? 'falseShake' : ''"
     *ngFor="let option of options; let i = index"
     (click)="onOptionClick(i)"
     [class.disabled-option]="isAnswerShown"

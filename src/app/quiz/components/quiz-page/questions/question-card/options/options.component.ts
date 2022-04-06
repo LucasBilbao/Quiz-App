@@ -1,33 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {
-  animate,
-  transition,
-  trigger,
-  style,
-  keyframes,
-  state,
-} from '@angular/animations';
+import { shake } from 'src/app/quiz/animations/shake.trigger';
 
 @Component({
   selector: 'app-options',
   templateUrl: './options.component.html',
   styleUrls: ['./options.component.scss'],
-  animations: [
-    trigger('shake', [
-      state('shaken', style({ transform: 'translateX(0)' })),
-      transition('* => shaken', [
-        animate(
-          '500ms',
-          keyframes([
-            style({ transform: 'translateX(10px)', offset: 0.2 }),
-            style({ transform: 'translateX(-10px)', offset: 0.4 }),
-            style({ transform: 'translateX(10px)', offset: 0.6 }),
-            style({ transform: 'translateX(-10px)', offset: 0.8 }),
-          ])
-        ),
-      ]),
-    ]),
-  ],
+  animations: [shake],
 })
 export class OptionsComponent {
   @Input() options: string[] = [];

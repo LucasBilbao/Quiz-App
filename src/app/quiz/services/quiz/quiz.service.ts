@@ -23,7 +23,7 @@ export class QuizService {
     return new Promise((res) => {
       setTimeout(() => {
         res(this.questions);
-      }, 2500);
+      }, 500);
     });
   }
 

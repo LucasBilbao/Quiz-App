@@ -50,29 +50,9 @@
   }
 }
 
-.question-card.change-question {
-  animation-name: move-question-card;
-  animation-duration: 3s;
-  animation-timing-function: cubic-bezier(0.5, -0.5, 0.5, 1.5);
-}
-
 @media screen and (max-width: 700px) {
   .question-card {
     width: 100%;
     height: auto;
-  }
-}
-
-@keyframes move-question-card {
-  0% {
-    left: 0;
-  }
-
-  50% {
-    left: -2500px;
-  }
-
-  100% {
-    left: 0;
   }
 }
