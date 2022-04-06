@@ -11,33 +11,28 @@
 
   <app-option-creator
     *ngFor="let option of options; let i = index"
-    [optionInfo]="{ index: i, option: option }"
+    [optionInfo]="{
+      index: i,
+      option: option
+    }"
+    [correctIndex]="correctIndex"
     (deleteOption)="onDeleteOption($event)"
+    (updateCorrectAnswerIndex)="updateCorrectAnswerIndex($event)"
     (updateOption)="onUpdateOption($event)"
   ></app-option-creator>
 
   <button mat-flat-button (click)="addOption()">+</button>
 
-  <mat-form-field class="example-form-field correct-answer" appearance="fill">
-    <mat-label>Correct Answer</mat-label>
-    <input
-      matInput
-      type="text"
-      autocomplete="off"
-      [(ngModel)]="question.answer"
-    />
-    <button
-      *ngIf="question.answer"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="question.answer = ''"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+  <h3 *ngIf="correctIndex !== -1">
+    Correct Answer: {{ question.options[correctIndex] }}
+  </h3>
 
-  <button mat-raised-button color="accent" (click)="postQuestion()">
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="postQuestion()"
+    [disabled]="!isItSafeToPostQuestion()"
+  >
     Submit Question
   </button>
 </div>

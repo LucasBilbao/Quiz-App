@@ -28,4 +28,14 @@
       <button mat-menu-item (click)="onDeleteOption()">Delete</button>
     </mat-menu>
   </button>
+
+  <button
+    *ngIf="optionInfo.option && !(optionInfo.index === correctIndex)"
+    matSuffix
+    mat-icon-button
+    aria-label="Check"
+    (click)="onCheckOption()"
+  >
+    <mat-icon>check</mat-icon>
+  </button>
 </mat-form-field>

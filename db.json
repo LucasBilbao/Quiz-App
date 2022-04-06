@@ -51,6 +51,17 @@
         "False",
         "It depends on the season"
       ]
+    },
+    {
+      "id": "1649247474947",
+      "question": "How many fingers do people have?",
+      "answer": "10",
+      "options": [
+        "5",
+        "12",
+        "10",
+        "22"
+      ]
     }
   ],
   "users": [
@@ -114,6 +125,21 @@
       },
       "scoreHistory": [
         {
+          "score": 5,
+          "maxScore": 6,
+          "date": "2022-04-06T13:43:37.334Z"
+        },
+        {
+          "score": 6,
+          "maxScore": 6,
+          "date": "2022-04-06T12:19:36.492Z"
+        },
+        {
+          "score": 7,
+          "maxScore": 7,
+          "date": "2022-04-06T12:12:53.848Z"
+        },
+        {
           "score": 3,
           "maxScore": 5,
           "date": "2022-04-06T10:28:06.033Z"
@@ -150,6 +176,9 @@
         }
       ],
       "myQuestions": [
+        "1649247474947",
+        "1649247089416",
+        "1649246066231",
         "1649070518773"
       ]
     },

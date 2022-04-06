@@ -17,6 +17,8 @@ export class CreateQuestionCardComponent implements OnInit {
 
   options: string[] = ['', ''];
 
+  correctIndex: number = -1;
+
   constructor(
     private quizServices: QuizService,
     private router: Router,
@@ -51,15 +53,27 @@ export class CreateQuestionCardComponent implements OnInit {
     this.options = this.question.options;
   }
 
-  updateCorrectAnswer(index: number): void {
-    this.question.answer = this.question.options[index];
+  updateCorrectAnswerIndex(index: number): void {
+    this.correctIndex = index;
+  }
+
+  isItSafeToPostQuestion(): boolean {
+    return (
+      !this.question.options.includes('') &&
+      this.question.question !== '' &&
+      this.correctIndex !== -1
+    );
   }
 
   postQuestion(): void {
-    this.quizServices.postNewQuestion(this.question).subscribe();
+    this.question.answer = this.question.options[this.correctIndex];
 
-    this.userService.putQuestion(this.question.id);
+    if (this.isItSafeToPostQuestion()) {
+      this.quizServices.postNewQuestion(this.question).subscribe();
 
-    this.router.navigate(['/quiz']);
+      this.userService.putQuestion(this.question.id);
+
+      this.router.navigate(['/quiz']);
+    }
   }
 }
