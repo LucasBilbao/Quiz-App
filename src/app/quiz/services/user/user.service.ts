@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User, UserCredentials } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
+import { getUniqueID } from '../../assets/getUniqueID';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +15,10 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     if (localStorage.getItem('isSignedIn') === null) {
-      localStorage.setItem('isSignedIn', 'false');
+      this.changeIsSignedInStatus(false);
     }
-    this.setIsSignedWithStorage();
+
+    this.isSignedIn = localStorage.getItem('isSignedIn') === 'true';
 
     if (this.isSignedIn) {
       this.fetchUserByID();
@@ -25,7 +27,7 @@ export class UserService {
 
   onRegister(userCredentials: UserCredentials): void {
     const userInfo: User = {
-      id: this.getUniqueID(),
+      id: getUniqueID(),
       userCredentials,
       scoreHistory: [],
       myQuestions: [],
@@ -43,30 +45,28 @@ export class UserService {
       )
       .subscribe((res) => {
         if (res.length !== 0) {
-          res.forEach((user) => {
-            if (
-              user.userCredentials.password === signInCredentials.password &&
-              user.userCredentials.username === signInCredentials.username
-            ) {
-              this.signIn(user);
-            }
-          });
+          const user: User | undefined = this.findUserByCredentials(
+            res,
+            signInCredentials
+          );
+
+          if (user) {
+            this.signIn(user);
+          }
         }
       });
   }
 
   onLogOut(): void {
-    localStorage.setItem('isSignedIn', 'false');
-    this.setIsSignedWithStorage();
+    this.changeIsSignedInStatus(false);
+
     localStorage.removeItem('userID');
     this.user = {} as User;
     location.reload();
   }
 
   signIn(user: User): void {
-    localStorage.setItem('isSignedIn', 'true');
-
-    this.setIsSignedWithStorage();
+    this.changeIsSignedInStatus(true);
 
     if (localStorage.getItem('userID') === null && this.isSignedIn) {
       localStorage.setItem('userID', user.id);
@@ -74,14 +74,6 @@ export class UserService {
 
     this.user = user as User;
     location.reload();
-  }
-
-  getUniqueID(): string {
-    return new Date().getTime().toString();
-  }
-
-  setIsSignedWithStorage(): void {
-    this.isSignedIn = localStorage.getItem('isSignedIn') === 'true';
   }
 
   putScore(score: number, maxScore: number): void {
@@ -130,6 +122,33 @@ export class UserService {
       setTimeout(() => {
         res(isUsernameTaken);
       }, 500);
+    });
+  }
+
+  changeIsSignedInStatus(status: boolean): void {
+    localStorage.setItem('isSignedIn', `${status}`);
+    this.isSignedIn = status;
+  }
+
+  isEachCredentialCorrect(
+    userCredentials: UserCredentials,
+    signedCredentials: UserCredentials
+  ): boolean {
+    return (
+      userCredentials.username === signedCredentials.username &&
+      userCredentials.password === signedCredentials.password
+    );
+  }
+
+  findUserByCredentials(
+    users: User[],
+    signedCredentials: UserCredentials
+  ): User | undefined {
+    return users.find((user) => {
+      return this.isEachCredentialCorrect(
+        user.userCredentials,
+        signedCredentials
+      );
     });
   }
 }

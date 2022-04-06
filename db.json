@@ -4,31 +4,53 @@
       "id": "5984327439572",
       "question": "What is the capital of France?",
       "answer": "Paris",
-      "options": ["Paris", "Marseille", "Lyon", "Toulouse"]
+      "options": [
+        "Paris",
+        "Marseille",
+        "Lyon",
+        "Toulouse"
+      ]
     },
     {
       "id": "8947315975423",
       "question": "What is the capital of Germany?",
       "answer": "Berlin",
-      "options": ["Munich", "Berlin", "Hamburg", "Frankfurt"]
+      "options": [
+        "Munich",
+        "Berlin",
+        "Hamburg",
+        "Frankfurt"
+      ]
     },
     {
       "id": "1649070518773",
       "question": "What color is the sky",
       "answer": "Blue",
-      "options": ["Blue", "Yellow", "Green"]
+      "options": [
+        "Blue",
+        "Yellow",
+        "Green"
+      ]
     },
     {
       "id": "1649139920133",
       "question": "Birds lay eggs.",
       "answer": "True",
-      "options": ["True", "False", "Sometimes"]
+      "options": [
+        "True",
+        "False",
+        "Sometimes"
+      ]
     },
     {
       "id": "1649146923746",
       "question": "The Earth is flat.",
       "answer": "False",
-      "options": ["True", "False", "It depends on the season"]
+      "options": [
+        "True",
+        "False",
+        "It depends on the season"
+      ]
     }
   ],
   "users": [
@@ -39,6 +61,11 @@
         "password": "lukas123456"
       },
       "scoreHistory": [
+        {
+          "score": 1,
+          "maxScore": 5,
+          "date": "2022-04-05T13:05:41.960Z"
+        },
         {
           "score": 5,
           "maxScore": 5,
@@ -65,7 +92,10 @@
           "date": "2022-04-05T06:39:35.110Z"
         }
       ],
-      "myQuestions": ["1649146923746", "1649139920133"]
+      "myQuestions": [
+        "1649146923746",
+        "1649139920133"
+      ]
     },
     {
       "id": "1649067250921",
@@ -82,8 +112,31 @@
         "username": "Lucas.Bilbao",
         "password": "lukas123456"
       },
-      "scoreHistory": [],
-      "myQuestions": ["1649070518773"]
+      "scoreHistory": [
+        {
+          "score": 3,
+          "maxScore": 5,
+          "date": "2022-04-06T08:29:38.953Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 5,
+          "date": "2022-04-06T07:44:51.922Z"
+        },
+        {
+          "score": 4,
+          "maxScore": 5,
+          "date": "2022-04-06T06:18:32.015Z"
+        },
+        {
+          "score": 4,
+          "maxScore": 5,
+          "date": "2022-04-06T06:14:13.062Z"
+        }
+      ],
+      "myQuestions": [
+        "1649070518773"
+      ]
     },
     {
       "id": "1649078955524",

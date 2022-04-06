@@ -12,6 +12,8 @@ import { QuizService } from '../../../services/quiz/quiz.service';
 export class QuestionsComponent implements OnInit {
   questions: Question[] = [];
 
+  progress: any = {};
+
   currentQuestionIndex: number = 0;
 
   isLoading: boolean = true;
@@ -56,5 +58,9 @@ export class QuestionsComponent implements OnInit {
     }, 5000);
 
     this.userService.putScore(this.getScore(), this.questions.length);
+  }
+
+  onUpdateProgressCircle(isCorrectlyAnswered: boolean): void {
+    this.progress[this.currentQuestionIndex] = isCorrectlyAnswered;
   }
 }

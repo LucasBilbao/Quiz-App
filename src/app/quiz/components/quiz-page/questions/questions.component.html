@@ -2,12 +2,23 @@
   <app-loader *ngIf="isLoading; else loaded"> </app-loader>
 
   <ng-template #loaded>
-    <app-question-card
-      [question]="questions[currentQuestionIndex]"
-      class="question-card"
-      (nextQuestion)="onNextClick()"
-      *ngIf="!isGameOver; else gameOver"
-    ></app-question-card>
+    <div *ngIf="!isGameOver; else gameOver" class="questions">
+      <div class="progress">
+        <div
+          class="question-circle"
+          *ngFor="let _ of questions; let i = index"
+          [class.correct]="progress[i] && progress[i] !== undefined"
+          [class.incorrect]="!progress[i] && progress[i] !== undefined"
+        ></div>
+      </div>
+
+      <app-question-card
+        [question]="questions[currentQuestionIndex]"
+        class="question-card"
+        (nextQuestion)="onNextClick()"
+        (updateProgressCircle)="onUpdateProgressCircle($event)"
+      ></app-question-card>
+    </div>
 
     <ng-template #gameOver>
       <mat-card class="score-card">

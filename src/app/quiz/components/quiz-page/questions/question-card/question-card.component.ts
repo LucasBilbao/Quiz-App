@@ -10,6 +10,7 @@ import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 export class QuestionCardComponent {
   @Input() question!: Question;
   @Output() nextQuestion = new EventEmitter<void>();
+  @Output() updateProgressCircle = new EventEmitter<boolean>();
 
   indexChecked: number = -1;
 
@@ -21,6 +22,8 @@ export class QuestionCardComponent {
 
   onNextClick(): void {
     this.isAnswerShown = true;
+
+    this.updateProgressCircle.emit(this.isCorrectChecked());
 
     this.resetOptions();
 

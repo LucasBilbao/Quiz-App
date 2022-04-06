@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { getUniqueID } from 'src/app/quiz/assets/getUniqueID';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { UserService } from 'src/app/quiz/services/user/user.service';
@@ -24,7 +25,7 @@ export class CreateQuestionCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.question = {
-      id: this.quizServices.getUniqueID(),
+      id: getUniqueID(),
       question: '',
       answer: '',
       options: ['', ''],

@@ -31,10 +31,6 @@ export class QuizService {
     return this.questions.sort(() => Math.random() - 0.5);
   }
 
-  getUniqueID(): string {
-    return new Date().getTime().toString();
-  }
-
   postNewQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(this.url, question);
   }
