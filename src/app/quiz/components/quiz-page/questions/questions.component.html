@@ -2,38 +2,44 @@
   <app-loader *ngIf="isLoading; else loaded"> </app-loader>
 
   <ng-template #loaded>
-    <div *ngIf="!isGameOver; else gameOver" class="questions">
-      <div class="progress">
-        <div
-          class="question-circle"
-          *ngFor="let _ of questions; let i = index"
-          [class.correct]="progress[i] && progress[i] !== undefined"
-          [class.incorrect]="!progress[i] && progress[i] !== undefined"
-          [class.active]="i === currentQuestionIndex"
-        ></div>
+    <div *ngIf="questions.length !== 0; else noQuestions">
+      <div *ngIf="!isGameOver; else gameOver" class="questions">
+        <div class="progress">
+          <div
+            class="question-circle"
+            *ngFor="let _ of questions; let i = index"
+            [class.correct]="progress[i] && progress[i] !== undefined"
+            [class.incorrect]="!progress[i] && progress[i] !== undefined"
+            [class.active]="i === currentQuestionIndex"
+          ></div>
+        </div>
+
+        <app-question-card
+          [question]="questions[currentQuestionIndex]"
+          class="question-card"
+          (nextQuestion)="onNextClick()"
+          (updateProgressCircle)="onUpdateProgressCircle($event)"
+        ></app-question-card>
       </div>
 
-      <app-question-card
-        [question]="questions[currentQuestionIndex]"
-        class="question-card"
-        (nextQuestion)="onNextClick()"
-        (updateProgressCircle)="onUpdateProgressCircle($event)"
-      ></app-question-card>
+      <ng-template #gameOver>
+        <mat-card class="score-card">
+          <h1>
+            You have collected {{ getScore() }} /
+            {{ questions.length }}
+          </h1>
+          <h2 *ngIf="getScore() / questions.length >= 0.5; else tryAgain">
+            That is really good
+          </h2>
+          <ng-template #tryAgain>
+            <h2>You need to study more!</h2>
+          </ng-template>
+        </mat-card>
+      </ng-template>
     </div>
+  </ng-template>
 
-    <ng-template #gameOver>
-      <mat-card class="score-card">
-        <h1>
-          You have collected {{ getScore() }} /
-          {{ questions.length }}
-        </h1>
-        <h2 *ngIf="getScore() / questions.length >= 0.5; else tryAgain">
-          That is really good
-        </h2>
-        <ng-template #tryAgain>
-          <h2>You need to study more!</h2>
-        </ng-template>
-      </mat-card>
-    </ng-template>
+  <ng-template #noQuestions>
+    <h1 class="no-questions">No questions available</h1>
   </ng-template>
 </div>
