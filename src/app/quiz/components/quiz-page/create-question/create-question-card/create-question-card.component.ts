@@ -81,7 +81,7 @@ export class CreateQuestionCardComponent implements OnInit {
   onDeleteOption(index: number): void {
     if (index === this.correctIndex) this.correctIndex = -1;
     this.question.options.splice(index, 1);
-    this.options = this.question.options;
+    this.options = new Array(...this.question.options);
   }
 
   updateCorrectAnswerIndex(index: number): void {
