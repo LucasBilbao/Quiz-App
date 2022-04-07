@@ -1,0 +1,30 @@
+.my-question-wrapper {
+  display: grid;
+
+  grid-template-columns: 450px;
+  grid-template-rows: repeat(auto-fill, 60px);
+  grid-gap: 20px;
+
+  justify-content: center;
+
+  width: 100%;
+  height: auto;
+
+  margin-top: 50px;
+
+  .loader {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.question-card {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  .buttons {
+    display: flex;
+  }
+}
