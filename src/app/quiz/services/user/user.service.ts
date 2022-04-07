@@ -107,7 +107,7 @@ export class UserService {
         ...this.user,
         myQuestions: this.user.myQuestions,
       })
-      .subscribe((user) => {});
+      .subscribe();
   }
 
   async isUsernameRegistered(username: string): Promise<boolean> {
