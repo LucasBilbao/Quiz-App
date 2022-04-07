@@ -4,6 +4,7 @@ import { getUniqueID } from 'src/app/quiz/assets/getUniqueID';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { UserService } from 'src/app/quiz/services/user/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-question-card',
@@ -22,7 +23,8 @@ export class CreateQuestionCardComponent implements OnInit {
   constructor(
     private quizServices: QuizService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +72,11 @@ export class CreateQuestionCardComponent implements OnInit {
     this.question.answer = this.question.options[this.correctIndex];
 
     if (this.isItSafeToPostQuestion()) {
-      this.quizServices.postNewQuestion(this.question).subscribe();
+      this.quizServices.postNewQuestion(this.question).subscribe(() => {
+        this._snackBar.open('Question posted successfully', '', {
+          duration: 3000,
+        });
+      });
 
       this.userService.putQuestion(this.question.id);
 
