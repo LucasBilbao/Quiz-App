@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'create-question', component: CreateQuestionComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'my-questions', component: MyQuestionsComponent },
+  { path: 'my-questions/edit/:id', component: CreateQuestionComponent },
 ];
 
 @NgModule({

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Question } from 'src/app/quiz/models/question.model';
 import { User } from 'src/app/quiz/models/user.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
@@ -18,10 +19,19 @@ export class MyQuestionsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (!this.userService.isSignedIn) {
+      this.router.navigate(['/sign-in']);
+    } else {
+      this.getData();
+    }
+  }
+
+  getData(): void {
     if (!this.userService.user) {
       this.userService.fetchUserByID().then((user) => {
         this.myQuestionIDs = user.myQuestions;
@@ -47,5 +57,9 @@ export class MyQuestionsComponent implements OnInit {
 
     this.quizService.deleteQuestion(id);
     this.userService.deleteQuestionID(id);
+  }
+
+  routerLink(id: string): string {
+    return `edit/${id}`;
   }
 }

@@ -35,6 +35,10 @@ export class QuizService {
     return this.http.post<Question>(this.url, question);
   }
 
+  putQuestion(question: Question): Observable<Question> {
+    return this.http.put<Question>(`${this.url}/${question.id}`, question);
+  }
+
   fetchQuestionsByIDs(ids: string[]): Observable<Question[]> {
     let fetchURL: string = this.url;
 

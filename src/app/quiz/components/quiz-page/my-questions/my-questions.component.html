@@ -8,7 +8,8 @@
       *ngFor="let question of questions; let i = index"
       >{{ question.question }}
       <div class="buttons">
-        <button matSuffix mat-icon-button aria-label="Edit" color="primary">
+        <button matSuffix mat-icon-button aria-label="Edit" color="primary"
+        [routerLink]="routerLink(question.id)">
           <mat-icon>edit</mat-icon>
         </button>
         <button matSuffix mat-icon-button aria-label="Delete">

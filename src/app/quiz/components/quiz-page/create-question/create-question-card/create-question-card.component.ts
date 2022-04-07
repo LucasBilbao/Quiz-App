@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { getUniqueID } from 'src/app/quiz/assets/getUniqueID';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
@@ -12,28 +12,56 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./create-question-card.component.scss'],
 })
 export class CreateQuestionCardComponent implements OnInit {
-  question!: Question;
+  question: Question = {
+    id: getUniqueID(),
+    question: '',
+    answer: '',
+    options: ['', ''],
+  };
 
-  questionString: string = '';
+  questionString!: string;
 
-  options: string[] = ['', ''];
+  options!: string[];
 
   correctIndex: number = -1;
+
+  isLoading: boolean = true;
+
+  isEditing: boolean = false;
 
   constructor(
     private quizServices: QuizService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.question = {
-      id: getUniqueID(),
-      question: '',
-      answer: '',
-      options: ['', ''],
-    };
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['id']) {
+        this.quizServices
+          .fetchQuestionsByIDs([params['id']])
+          .subscribe((question) => {
+            this.question = question[0];
+            this.isEditing = true;
+            this.prepareProperties();
+          });
+      }
+      this.prepareProperties();
+    });
+  }
+
+  prepareProperties(): void {
+    this.questionString = this.question.question;
+    this.options = new Array(...this.question.options);
+    if (this.isEditing) {
+      this.correctIndex = this.question.options.findIndex(
+        (option) => option === this.question.answer
+      );
+    }
+
+    this.isLoading = false;
   }
 
   addOption(): void {
@@ -68,19 +96,37 @@ export class CreateQuestionCardComponent implements OnInit {
     );
   }
 
-  postQuestion(): void {
+  onSubmitQuestion(): void {
     this.question.answer = this.question.options[this.correctIndex];
 
     if (this.isItSafeToPostQuestion()) {
-      this.quizServices.postNewQuestion(this.question).subscribe(() => {
-        this._snackBar.open('Question posted successfully', '', {
-          duration: 3000,
-        });
-      });
+      if (this.isEditing) {
+        this.putQuestion();
+      } else {
+        this.onSubmitQuestion();
+      }
 
       this.userService.putQuestion(this.question.id);
 
       this.router.navigate(['/quiz']);
     }
+  }
+
+  openSnackBar(): void {
+    this._snackBar.open('Question posted successfully', '', {
+      duration: 3000,
+    });
+  }
+
+  putQuestion(): void {
+    this.quizServices.putQuestion(this.question).subscribe(() => {
+      this.openSnackBar();
+    });
+  }
+
+  postQuestion(): void {
+    this.quizServices.postNewQuestion(this.question).subscribe(() => {
+      this.openSnackBar();
+    });
   }
 }
