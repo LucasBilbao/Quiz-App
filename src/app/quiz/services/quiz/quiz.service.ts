@@ -34,4 +34,24 @@ export class QuizService {
   postNewQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(this.url, question);
   }
+
+  fetchQuestionsByIDs(ids: string[]): Observable<Question[]> {
+    let fetchURL: string = this.url;
+
+    ids.forEach((id: string, index: number) => {
+      if (index === 0) {
+        fetchURL = `${fetchURL}?id=${id}&`;
+      } else if (index === ids.length - 1) {
+        fetchURL = `${fetchURL}id=${id}`;
+      } else {
+        fetchURL = `${fetchURL}id=${id}&`;
+      }
+    });
+
+    return this.http.get<Question[]>(`${fetchURL}`);
+  }
+
+  deleteQuestion(id: string): void {
+    this.http.delete(`${this.url}/${id}`).subscribe();
+  }
 }
