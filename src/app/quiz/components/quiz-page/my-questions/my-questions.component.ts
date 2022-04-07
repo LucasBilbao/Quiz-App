@@ -42,9 +42,7 @@ export class MyQuestionsComponent implements OnInit {
       });
   }
 
-  onDeleteQuestion(question: Question): void {
-    const index: number = this.questions.findIndex((q) => q.id === question.id);
-
+  onDeleteQuestion(question: Question, index: number): void {
     this.questions.splice(index, 1);
 
     this.quizService.deleteQuestion(question.id);
