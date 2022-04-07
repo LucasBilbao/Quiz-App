@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateQuestionComponent } from '../quiz/components/quiz-page/create-question/create-question.component';
 import { HistoryComponent } from '../quiz/components/quiz-page/history/history.component';
+import { MyQuestionsComponent } from '../quiz/components/quiz-page/my-questions/my-questions.component';
 import { QuestionsComponent } from '../quiz/components/quiz-page/questions/questions.component';
 import { QuizPageComponent } from '../quiz/components/quiz-page/quiz-page.component';
 import { SignInComponent } from '../quiz/components/quiz-page/sign-in/sign-in.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'quiz/questions', component: QuestionsComponent },
   { path: 'create-question', component: CreateQuestionComponent },
   { path: 'history', component: HistoryComponent },
+  { path: 'my-questions', component: MyQuestionsComponent },
 ];
 
 @NgModule({

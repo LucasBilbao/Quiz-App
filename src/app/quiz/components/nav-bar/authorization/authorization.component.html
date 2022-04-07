@@ -28,6 +28,7 @@
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item routerLink="my-questions">My Questions</button>
     <button mat-menu-item (click)="logOut()">Log Out</button>
   </mat-menu>
 </ng-template>
