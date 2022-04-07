@@ -17,6 +17,7 @@ import { OptionCreatorComponent } from './components/quiz-page/create-question/c
 import { HistoryComponent } from './components/quiz-page/history/history.component';
 import { SignInComponent } from './components/quiz-page/sign-in/sign-in.component';
 import { MyQuestionsComponent } from './components/quiz-page/my-questions/my-questions.component';
+import { QuestionListComponent } from './components/quiz-page/question-list/question-list.component';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -52,6 +53,7 @@ import { SharedModule } from '../shared/shared.module';
     HistoryComponent,
     SignInComponent,
     MyQuestionsComponent,
+    QuestionListComponent,
   ],
   imports: [
     CommonModule,

@@ -9,7 +9,7 @@ import { Question } from '../../models/question.model';
 export class QuizService {
   url: string = 'questions';
 
-  questions: Question[] = [];
+  questions!: Question[];
 
   score: number = 0;
 

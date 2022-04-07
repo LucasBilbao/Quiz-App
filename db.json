@@ -29,10 +29,7 @@
         "Paris",
         "Marseille",
         "Lyon",
-        "Toulouse",
-        "dadvdsadsa",
-        "ascdsaccds",
-        "cdsacdsaccdsacdascds"
+        "Toulouse"
       ]
     },
     {
@@ -118,6 +115,26 @@
         "password": "lukas123456"
       },
       "scoreHistory": [
+        {
+          "score": 2,
+          "maxScore": 3,
+          "date": "2022-04-07T18:52:06.026Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-07T18:47:48.095Z"
+        },
+        {
+          "score": 6,
+          "maxScore": 6,
+          "date": "2022-04-07T18:47:17.153Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-07T18:45:33.121Z"
+        },
         {
           "score": 6,
           "maxScore": 6,
@@ -205,6 +222,7 @@
         }
       ],
       "myQuestions": [
+        "1649339401482",
         "1649339401482",
         "1649339401482",
         "1649339401482",

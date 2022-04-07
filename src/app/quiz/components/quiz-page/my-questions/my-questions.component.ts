@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Question } from 'src/app/quiz/models/question.model';
-import { User } from 'src/app/quiz/models/user.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 
@@ -19,16 +17,11 @@ export class MyQuestionsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private quizService: QuizService,
-    private router: Router
+    private quizService: QuizService
   ) {}
 
   ngOnInit(): void {
-    if (!this.userService.isSignedIn) {
-      this.router.navigate(['/sign-in']);
-    } else {
-      this.getData();
-    }
+    this.getData();
   }
 
   getData(): void {

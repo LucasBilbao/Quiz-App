@@ -21,9 +21,7 @@ export class SignUpComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    if (this.userService.isSignedIn) {
-      this.router.navigate(['/quiz']);
-    }
+    
   }
 
   async onSubmit(): Promise<void> {

@@ -27,10 +27,6 @@ export class QuestionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.userService.isSignedIn) {
-      this.router.navigate(['/sign-in']);
-    }
-
     if (this.quizServices.questions) {
       this.questions = this.quizServices.getShuffledQuestions();
       this.isLoading = false;
