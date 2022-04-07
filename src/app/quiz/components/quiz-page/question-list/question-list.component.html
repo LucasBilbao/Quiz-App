@@ -1,0 +1,46 @@
+<div class="question-list-wrapper">
+  <div class="loader" *ngIf="isLoading; else questionList">
+    <app-loader></app-loader>
+  </div>
+
+  <ng-template #questionList>
+    <button
+      mat-flat-button
+      color="accent"
+      [disabled]="chosenQuestions.length === 0"
+      (click)="onStartGame()"
+    >
+      Start The Game
+    </button>
+    <button mat-flat-button color="accent" (click)="onSelectAll()">
+      Select All
+    </button>
+
+    <hr />
+
+    <button
+      mat-flat-button
+      *ngFor="let question of questions"
+      [class.chosen]="isChosen(question)"
+      (click)="
+        isChosen(question) ? removeQuestion(question.id) : addQuestion(question)
+      "
+    >
+      {{ question.question }}
+    </button>
+
+    <hr />
+
+    <button mat-flat-button color="accent" (click)="onSelectAll()">
+      Select All
+    </button>
+    <button
+      mat-flat-button
+      color="accent"
+      [disabled]="chosenQuestions.length === 0"
+      (click)="onStartGame()"
+    >
+      Start The Game
+    </button>
+  </ng-template>
+</div>

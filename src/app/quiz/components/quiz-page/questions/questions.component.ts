@@ -31,10 +31,15 @@ export class QuestionsComponent implements OnInit {
       this.router.navigate(['/sign-in']);
     }
 
-    this.quizServices.fetchQuestions().then((questions) => {
+    if (this.quizServices.questions) {
       this.questions = this.quizServices.getShuffledQuestions();
       this.isLoading = false;
-    });
+    } else {
+      this.quizServices.fetchQuestions().then((questions) => {
+        this.questions = this.quizServices.getShuffledQuestions();
+        this.isLoading = false;
+      });
+    }
   }
 
   onNextClick(): void {
