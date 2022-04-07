@@ -7,7 +7,7 @@ import { Question } from '../../models/question.model';
   providedIn: 'root',
 })
 export class QuizService {
-  url: string = 'http://localhost:3000/questions';
+  url: string = 'questions';
 
   questions: Question[] = [];
 

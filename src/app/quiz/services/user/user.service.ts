@@ -7,7 +7,7 @@ import { getUniqueID } from '../../assets/getUniqueID';
   providedIn: 'root',
 })
 export class UserService {
-  url: string = 'http://localhost:3000/users';
+  url: string = 'users';
 
   user!: User;
 
