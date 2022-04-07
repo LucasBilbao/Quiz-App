@@ -28,3 +28,10 @@
     display: flex;
   }
 }
+
+@media screen and (max-width: 451px) {
+  .my-question-wrapper {
+    justify-content: start;
+    grid-template-columns: 100%;
+  }
+}
