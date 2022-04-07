@@ -14,7 +14,7 @@
         <button matSuffix mat-icon-button aria-label="Delete">
           <mat-icon [matMenuTriggerFor]="delete" color="warn">delete</mat-icon>
           <mat-menu #delete="matMenu">
-            <button mat-menu-item (click)="onDeleteQuestion(question, i)">
+            <button mat-menu-item (click)="onDeleteQuestion(question.id, i)">
               Delete
             </button>
           </mat-menu>
