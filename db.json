@@ -1,48 +1,6 @@
 {
   "questions": [
     {
-      "id": "5984327439572",
-      "question": "What is the capital of France?",
-      "answer": "Paris",
-      "options": [
-        "Paris",
-        "Marseille",
-        "Lyon",
-        "Toulouse"
-      ]
-    },
-    {
-      "id": "8947315975423",
-      "question": "What is the capital of Germany?",
-      "answer": "Berlin",
-      "options": [
-        "Munich",
-        "Berlin",
-        "Hamburg",
-        "Frankfurt"
-      ]
-    },
-    {
-      "id": "1649070518773",
-      "question": "What color is the sky",
-      "answer": "Blue",
-      "options": [
-        "Blue",
-        "Yellow",
-        "Green"
-      ]
-    },
-    {
-      "id": "1649139920133",
-      "question": "Birds lay eggs.",
-      "answer": "True",
-      "options": [
-        "True",
-        "False",
-        "Sometimes"
-      ]
-    },
-    {
       "id": "1649146923746",
       "question": "The Earth is flat.",
       "answer": "False",
@@ -61,6 +19,48 @@
         "12",
         "10",
         "22"
+      ]
+    },
+    {
+      "id": "1649339401482",
+      "question": "What is the capital of France?",
+      "answer": "Paris",
+      "options": [
+        "Paris",
+        "Marseille",
+        "Lyon",
+        "Toulouse"
+      ]
+    },
+    {
+      "id": "1649339457601",
+      "question": "What is the capital of Germany?",
+      "answer": "Berlin",
+      "options": [
+        "Munich",
+        "Berlin",
+        "Hamburg",
+        "Frankfurt"
+      ]
+    },
+    {
+      "id": "1649339501859",
+      "question": "Birds lay eggs.",
+      "answer": "True",
+      "options": [
+        "True",
+        "False",
+        "Sometimes"
+      ]
+    },
+    {
+      "id": "1649339531779",
+      "question": "What color is the sky?",
+      "answer": "Blue",
+      "options": [
+        "Blue",
+        "Yellow",
+        "IDK"
       ]
     }
   ],
@@ -109,21 +109,37 @@
       ]
     },
     {
-      "id": "1649067250921",
-      "userCredentials": {
-        "username": "vfdsvfdsvfldjvn",
-        "password": "vfsvfdfdvfd"
-      },
-      "scoreHistory": [],
-      "myQuestions": []
-    },
-    {
       "id": "1649069145173",
       "userCredentials": {
         "username": "Lucas.Bilbao",
         "password": "lukas123456"
       },
       "scoreHistory": [
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-07T13:49:53.891Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 2,
+          "date": "2022-04-07T13:10:53.258Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-07T13:09:08.546Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 1,
+          "date": "2022-04-07T13:07:43.639Z"
+        },
+        {
+          "score": 3,
+          "maxScore": 6,
+          "date": "2022-04-07T10:20:34.340Z"
+        },
         {
           "score": 5,
           "maxScore": 6,
@@ -176,10 +192,11 @@
         }
       ],
       "myQuestions": [
-        "1649247474947",
-        "1649247089416",
-        "1649246066231",
-        "1649070518773"
+        "1649339531779",
+        "1649339501859",
+        "1649339457601",
+        "1649339401482",
+        "1649337058369"
       ]
     },
     {
