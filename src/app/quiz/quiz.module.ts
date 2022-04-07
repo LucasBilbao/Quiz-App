@@ -16,6 +16,7 @@ import { SignUpComponent } from './components/quiz-page/sign-up/sign-up.componen
 import { OptionCreatorComponent } from './components/quiz-page/create-question/create-question-card/option-creator/option-creator.component';
 import { HistoryComponent } from './components/quiz-page/history/history.component';
 import { SignInComponent } from './components/quiz-page/sign-in/sign-in.component';
+import { MyQuestionsComponent } from './components/quiz-page/my-questions/my-questions.component';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -28,11 +29,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // My Modules
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
-import { MyQuestionsComponent } from './components/quiz-page/my-questions/my-questions.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MyQuestionsComponent } from './components/quiz-page/my-questions/my-que
     MatRadioModule,
     MatTableModule,
     SharedModule,
+    MatSnackBarModule,
   ],
   exports: [QuizPageComponent],
 })
