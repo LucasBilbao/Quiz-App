@@ -32,6 +32,7 @@ import { MatTableModule } from '@angular/material/table';
 // My Modules
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
+import { MyQuestionsComponent } from './components/quiz-page/my-questions/my-questions.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SharedModule } from '../shared/shared.module';
     OptionCreatorComponent,
     HistoryComponent,
     SignInComponent,
+    MyQuestionsComponent,
   ],
   imports: [
     CommonModule,
