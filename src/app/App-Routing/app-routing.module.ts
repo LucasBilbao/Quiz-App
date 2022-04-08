@@ -8,11 +8,9 @@ import { QuestionsComponent } from '../quiz/components/quiz-page/questions/quest
 import { SignInComponent } from '../quiz/components/quiz-page/sign-in/sign-in.component';
 import { SignUpComponent } from '../quiz/components/quiz-page/sign-up/sign-up.component';
 import { StartQuizComponent } from '../quiz/components/quiz-page/start-quiz/start-quiz.component';
-import { UserService } from '../quiz/services/user/user.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
-  { path: '**', redirectTo: 'sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'quiz', component: StartQuizComponent },
@@ -22,6 +20,7 @@ const routes: Routes = [
   { path: 'history', component: HistoryComponent },
   { path: 'my-questions', component: MyQuestionsComponent },
   { path: 'my-questions/edit/:id', component: CreateQuestionComponent },
+  { path: '**', redirectTo: 'sign-in', pathMatch: 'full' },
 ];
 
 @NgModule({

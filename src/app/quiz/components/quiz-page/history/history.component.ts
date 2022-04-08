@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ScoreInfo } from 'src/app/quiz/models/user.model';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 
@@ -13,17 +14,21 @@ export class HistoryComponent implements OnInit {
 
   scoreHistory: ScoreInfo[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    if (!this.userService.user) {
-      this.userService.fetchUserByID().then((user) => {
-        this.scoreHistory = user.scoreHistory;
-        this.isLoading = false;
-      });
+    if (!this.userService.isSignedIn) {
+      this.router.navigate(['/sign-in']);
     } else {
-      this.scoreHistory = this.userService.user.scoreHistory;
-      this.isLoading = false;
+      if (!this.userService.user) {
+        this.userService.fetchUserByID().then((user) => {
+          this.scoreHistory = user.scoreHistory;
+          this.isLoading = false;
+        });
+      } else {
+        this.scoreHistory = this.userService.user.scoreHistory;
+        this.isLoading = false;
+      }
     }
   }
 

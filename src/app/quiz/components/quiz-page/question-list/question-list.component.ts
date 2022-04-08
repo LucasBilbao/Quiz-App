@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
+import { UserService } from 'src/app/quiz/services/user/user.service';
 
 @Component({
   selector: 'app-question-list',
@@ -15,13 +16,21 @@ export class QuestionListComponent implements OnInit {
 
   chosenQuestions: Question[] = [];
 
-  constructor(private quizServices: QuizService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private quizServices: QuizService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.quizServices.fetchQuestions().then((questions) => {
-      this.questions = this.quizServices.questions;
-      this.isLoading = false;
-    });
+    if (!this.userService.isSignedIn) {
+      this.router.navigate(['/sign-in']);
+    } else {
+      this.quizServices.fetchQuestions().then((questions) => {
+        this.questions = questions;
+        this.isLoading = false;
+      });
+    }
   }
 
   isChosen(question: Question): boolean {

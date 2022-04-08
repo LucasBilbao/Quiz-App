@@ -1,6 +1,6 @@
 import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 import { User } from '../../../models/user.model';

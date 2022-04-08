@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserCredentials } from 'src/app/quiz/models/user.model';
 import { UserService } from 'src/app/quiz/services/user/user.service';
