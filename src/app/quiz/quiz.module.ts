@@ -35,6 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 // My Modules
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
+import { InputPasswordErrorsComponent } from './components/quiz-page/sign-up/input-password-errors/input-password-errors.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { SharedModule } from '../shared/shared.module';
     SignInComponent,
     MyQuestionsComponent,
     QuestionListComponent,
+    InputPasswordErrorsComponent,
   ],
   imports: [
     CommonModule,

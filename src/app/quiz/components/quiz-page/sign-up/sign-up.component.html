@@ -1,35 +1,37 @@
 <div class="sign-up-wrapper">
-  <form class="example-form" action="submit" (submit)="onSubmit()">
+  <form
+    class="example-form"
+    action="submit"
+    (submit)="onSubmit()"
+    [formGroup]="userForm"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Username</mat-label>
       <input
         type="username"
         matInput
-        [formControl]="usernameFormControl"
+        formControlName="name"
         placeholder="Ex. JohnDoe"
         autocomplete="off"
       />
-      <mat-hint>Errors appear instantly!</mat-hint>
-      <mat-error
-        *ngIf="
-          usernameFormControl.hasError('email') &&
-          !usernameFormControl.hasError('required')
-        "
-      >
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="usernameFormControl.hasError('required')">
+      <mat-error *ngIf="userForm.get('name')?.hasError('required')">
         Username is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="userForm.get('name')?.hasError('usernameExists')">
+        Username <strong>already</strong> exists
+      </mat-error>
+      <mat-error *ngIf="userForm.get('name')?.errors?.['minlength']">
+        Username must be at least 5 characters long.
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="password-field">
       <mat-label>Enter new password</mat-label>
       <input
         matInput
         [type]="hidePassword ? 'password' : 'text'"
         autocomplete="off"
-        [formControl]="passwordFormControl"
+        formControlName="password"
       />
       <button
         mat-icon-button
@@ -43,14 +45,20 @@
         }}</mat-icon>
       </button>
     </mat-form-field>
+    <app-input-password-errors
+      *ngIf="
+        userForm.get('password')?.errors && userForm.get('password')?.touched
+      "
+      [errors]="userForm.get('password')?.errors"
+    ></app-input-password-errors>
 
     <mat-form-field appearance="fill">
-      <mat-label>Repeat password</mat-label>
+      <mat-label>Confirm password</mat-label>
       <input
         matInput
         [type]="hidePassword ? 'password' : 'text'"
         autocomplete="off"
-        [formControl]="repeatPasswordFormControl"
+        formControlName="confirmPassword"
       />
       <button
         mat-icon-button
@@ -64,7 +72,17 @@
         }}</mat-icon>
       </button>
     </mat-form-field>
+    <mat-error *ngIf="userForm.errors?.['passwordValuesDoNotMatch']">
+      Passwords have to match
+    </mat-error>
 
-    <button type="submit" mat-button color="accent">Register</button>
+    <button
+      type="submit"
+      [disabled]="!userForm.valid"
+      mat-button
+      color="accent"
+    >
+      Sign Up
+    </button>
   </form>
 </div>

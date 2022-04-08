@@ -1,7 +1,18 @@
-import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import {
+  passwordValuesAreEqual,
+  strongPassword,
+} from 'src/app/quiz/assets/validators/password.validator';
+import { getUsernameExistenceValidator } from 'src/app/quiz/assets/validators/username.validator';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 import { User } from '../../../models/user.model';
 
@@ -11,34 +22,31 @@ import { User } from '../../../models/user.model';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  usernameFormControl = new FormControl('', [Validators.required]);
-
-  passwordFormControl = new FormControl('', [Validators.required]);
-  repeatPasswordFormControl = new FormControl('', [Validators.required]);
+  userForm: FormGroup = new FormGroup(
+    {
+      name: new FormControl(
+        '',
+        [Validators.required, Validators.minLength(5)],
+        [getUsernameExistenceValidator(this.userService)]
+      ),
+      password: new FormControl('', [Validators.required, strongPassword]),
+      confirmPassword: new FormControl('', [Validators.required]),
+    },
+    {
+      validators: passwordValuesAreEqual,
+    }
+  );
 
   hidePassword = true;
 
   constructor(private userService: UserService, private router: Router) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   async onSubmit(): Promise<void> {
-    const isUsernameTaken: boolean = await this.userService
-      .isUsernameRegistered(this.usernameFormControl.value)
-      .then((data) => data);
-
-    if (
-      this.usernameFormControl.valid &&
-      this.passwordFormControl.value === this.repeatPasswordFormControl.value &&
-      !isUsernameTaken
-    ) {
-      console.log('here');
-      this.userService.onRegister({
-        username: this.usernameFormControl.value,
-        password: this.passwordFormControl.value,
-      });
-    }
+    this.userService.onRegister({
+      username: this.userForm.value.name,
+      password: this.userForm.value.password,
+    });
   }
 }

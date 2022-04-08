@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User, UserCredentials } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { getUniqueID } from '../../assets/getUniqueID';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -110,19 +111,10 @@ export class UserService {
       .subscribe();
   }
 
-  async isUsernameRegistered(username: string): Promise<boolean> {
-    let isUsernameTaken: any;
-    this.http
-      .get<User[]>(`${this.url}?userCredentials.username=${username}`)
-      .subscribe((res) => {
-        isUsernameTaken = res.length !== 0;
-      });
-
-    return new Promise((res) => {
-      setTimeout(() => {
-        res(isUsernameTaken);
-      }, 500);
-    });
+  fetchUsersByUsername(username: string): Observable<User[]> {
+    return this.http.get<User[]>(
+      `${this.url}?userCredentials.username=${username}`
+    );
   }
 
   changeIsSignedInStatus(status: boolean): void {
