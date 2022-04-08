@@ -13,7 +13,6 @@ import { OptionsComponent } from './components/quiz-page/questions/question-card
 import { CreateQuestionComponent } from './components/quiz-page/create-question/create-question.component';
 import { CreateQuestionCardComponent } from './components/quiz-page/create-question/create-question-card/create-question-card.component';
 import { SignUpComponent } from './components/quiz-page/sign-up/sign-up.component';
-import { OptionCreatorComponent } from './components/quiz-page/create-question/create-question-card/option-creator/option-creator.component';
 import { HistoryComponent } from './components/quiz-page/history/history.component';
 import { SignInComponent } from './components/quiz-page/sign-in/sign-in.component';
 import { MyQuestionsComponent } from './components/quiz-page/my-questions/my-questions.component';
@@ -50,7 +49,6 @@ import { InputPasswordErrorsComponent } from './components/quiz-page/sign-up/inp
     CreateQuestionComponent,
     CreateQuestionCardComponent,
     SignUpComponent,
-    OptionCreatorComponent,
     HistoryComponent,
     SignInComponent,
     MyQuestionsComponent,

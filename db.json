@@ -245,7 +245,13 @@
         "username": "LucasBilbao1",
         "password": "Lukas-12345"
       },
-      "scoreHistory": [],
+      "scoreHistory": [
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-08T15:32:59.325Z"
+        }
+      ],
       "myQuestions": []
     }
   ]

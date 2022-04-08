@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { getUniqueID } from 'src/app/quiz/assets/getUniqueID';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-create-question-card',
@@ -12,29 +19,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./create-question-card.component.scss'],
 })
 export class CreateQuestionCardComponent implements OnInit {
-  question: Question = {
-    id: getUniqueID(),
-    question: '',
-    answer: '',
-    options: ['', ''],
-  };
-
-  questionString!: string;
-
-  options!: string[];
-
-  correctIndex: number = -1;
+  questionForm!: FormGroup;
 
   isLoading: boolean = true;
 
   isEditing: boolean = false;
 
+  answerIndex: number = -1;
+
   constructor(
     private quizServices: QuizService,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -42,74 +40,49 @@ export class CreateQuestionCardComponent implements OnInit {
       if (params['id']) {
         this.quizServices
           .fetchQuestionsByIDs([params['id']])
-          .subscribe((question) => {
-            this.question = question[0];
+          .subscribe((questions) => {
+            this.prepareQuestionForm(questions[0]);
             this.isEditing = true;
-            this.prepareProperties();
           });
       }
-      this.prepareProperties();
+      this.prepareQuestionForm({
+        id: getUniqueID(),
+        question: '',
+        answer: '',
+        options: ['', ''],
+      });
     });
   }
 
-  prepareProperties(): void {
-    this.questionString = this.question.question;
-    this.options = new Array(...this.question.options);
-    if (this.isEditing) {
-      this.correctIndex = this.question.options.findIndex(
-        (option) => option === this.question.answer
-      );
-    }
+  prepareQuestionForm(question: Question): void {
+    this.questionForm = this.fb.group({
+      id: [question.id, Validators.required],
+      question: [question.question, Validators.required],
+      answer: [question.answer, Validators.required],
+      options: this.fb.array([]),
+    });
 
+    question.options.forEach((option) => {
+      this.addOption(option);
+    });
     this.isLoading = false;
   }
 
-  addOption(): void {
-    this.question.options.push('');
-    this.options.push('');
+  get options() {
+    return this.questionForm.get('options') as FormArray;
   }
 
-  onUpdateOption(optionInfo: any): void {
-    this.question.options[optionInfo.index] = optionInfo.option;
+  addOption(option: string): void {
+    this.options.push(this.createOption(option));
   }
 
-  clearOption(index: number): void {
-    this.options[index] = '';
-    this.onUpdateOption({ index, option: '' });
-  }
-
-  onDeleteOption(index: number): void {
-    if (index === this.correctIndex) this.correctIndex = -1;
-    this.question.options.splice(index, 1);
-    this.options = new Array(...this.question.options);
-  }
-
-  updateCorrectAnswerIndex(index: number): void {
-    this.correctIndex = index;
-  }
-
-  isItSafeToPostQuestion(): boolean {
-    return (
-      !this.question.options.includes('') &&
-      this.question.question !== '' &&
-      this.correctIndex !== -1
-    );
+  createOption(option: string): FormControl {
+    return new FormControl(option, [Validators.required]);
   }
 
   onSubmitQuestion(): void {
-    this.question.answer = this.question.options[this.correctIndex];
-
-    if (this.isItSafeToPostQuestion()) {
-      if (this.isEditing) {
-        this.putQuestion();
-      } else {
-        this.onSubmitQuestion();
-      }
-
-      this.userService.putQuestion(this.question.id);
-
-      this.router.navigate(['/quiz']);
-    }
+    this.updateAnswerIndex(this.answerIndex);
+    console.log(this.questionForm.value);
   }
 
   openSnackBar(): void {
@@ -118,15 +91,25 @@ export class CreateQuestionCardComponent implements OnInit {
     });
   }
 
-  putQuestion(): void {
-    this.quizServices.putQuestion(this.question).subscribe(() => {
-      this.openSnackBar();
-    });
+  removeOptionOn(index: number): void {
+    this.options.removeAt(index);
+    if (index === this.answerIndex) this.answerIndex--;
   }
 
-  postQuestion(): void {
-    this.quizServices.postNewQuestion(this.question).subscribe(() => {
-      this.openSnackBar();
-    });
+  updateAnswerIndex(index: number): void {
+    this.answerIndex = index;
+    this.questionForm.patchValue({ answer: this.options.at(index).value });
   }
+
+  // putQuestion(): void {
+  //   this.quizServices.putQuestion(this.question.value).subscribe(() => {
+  //     this.openSnackBar();
+  //   });
+  // }
+
+  // postQuestion(): void {
+  //   this.quizServices.postNewQuestion(this.question).subscribe(() => {
+  //     this.openSnackBar();
+  //   });
+  // }
 }
