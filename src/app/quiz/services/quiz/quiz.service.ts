@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Question } from '../../models/question.model';
 
 @Injectable({
@@ -40,6 +40,8 @@ export class QuizService {
   }
 
   fetchQuestionsByIDs(ids: string[]): Observable<Question[]> {
+    if (ids.length === 0) return of([]);
+
     let fetchURL: string = this.url;
 
     ids.forEach((id: string, index: number) => {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
@@ -19,7 +20,8 @@ export class MyQuestionsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private quizService: QuizService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -56,9 +58,17 @@ export class MyQuestionsComponent implements OnInit {
 
     this.quizService.deleteQuestion(id);
     this.userService.deleteQuestionID(id);
+
+    this.openSnackBar()
   }
 
   routerLink(id: string): string {
     return `edit/${id}`;
+  }
+
+  openSnackBar(): void {
+    this._snackBar.open('Question deleted', '', {
+      duration: 3000,
+    });
   }
 }

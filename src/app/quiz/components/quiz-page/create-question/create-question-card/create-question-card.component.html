@@ -11,6 +11,9 @@
           autocomplete="off"
           formControlName="question"
         ></textarea>
+        <mat-error *ngIf="questionForm.get('question')?.hasError('required')">
+          Question is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
 
       <ng-container
@@ -50,13 +53,18 @@
           >
             <mat-icon>check</mat-icon>
           </button>
+          <mat-error *ngIf="options.at(i)?.hasError('required')">
+            Option {{ i + 1 }} is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
       </ng-container>
 
       <button mat-flat-button (click)="addOption('')">+</button>
 
       <h3>Correct Answer: {{ options.at(answerIndex)?.value }}</h3>
-
+      <mat-error *ngIf="questionForm.get('answer')?.hasError('required')">
+        Answer is <strong>required</strong>
+      </mat-error>
       <button
         mat-raised-button
         color="accent"

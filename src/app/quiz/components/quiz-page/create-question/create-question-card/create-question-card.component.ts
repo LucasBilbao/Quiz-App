@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getUniqueID } from 'src/app/quiz/assets/getUniqueID';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
@@ -29,6 +29,7 @@ export class CreateQuestionCardComponent implements OnInit {
 
   constructor(
     private quizServices: QuizService,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private _snackBar: MatSnackBar,
@@ -62,8 +63,11 @@ export class CreateQuestionCardComponent implements OnInit {
       options: this.fb.array([]),
     });
 
-    question.options.forEach((option) => {
+    question.options.forEach((option, index) => {
       this.addOption(option);
+      if (option === question.answer && option !== '') {
+        this.answerIndex = index;
+      }
     });
     this.isLoading = false;
   }
@@ -82,7 +86,16 @@ export class CreateQuestionCardComponent implements OnInit {
 
   onSubmitQuestion(): void {
     this.updateAnswerIndex(this.answerIndex);
-    console.log(this.questionForm.value);
+
+    if (this.isEditing) {
+      this.putQuestion();
+    } else {
+      this.postQuestion();
+    }
+
+    this.userService.putQuestion(this.questionForm.get('id')?.value);
+
+    this.router.navigate(['/quiz']);
   }
 
   openSnackBar(): void {
@@ -101,15 +114,24 @@ export class CreateQuestionCardComponent implements OnInit {
     this.questionForm.patchValue({ answer: this.options.at(index).value });
   }
 
-  // putQuestion(): void {
-  //   this.quizServices.putQuestion(this.question.value).subscribe(() => {
-  //     this.openSnackBar();
-  //   });
-  // }
+  putQuestion(): void {
+    this.quizServices.putQuestion(this.createQuestion()).subscribe(() => {
+      this.openSnackBar();
+    });
+  }
 
-  // postQuestion(): void {
-  //   this.quizServices.postNewQuestion(this.question).subscribe(() => {
-  //     this.openSnackBar();
-  //   });
-  // }
+  postQuestion(): void {
+    this.quizServices.postNewQuestion(this.createQuestion()).subscribe(() => {
+      this.openSnackBar();
+    });
+  }
+
+  createQuestion(): Question {
+    return {
+      id: this.questionForm.get('id')?.value,
+      question: this.questionForm.get('question')?.value,
+      answer: this.questionForm.get('answer')?.value,
+      options: this.options.value,
+    };
+  }
 }

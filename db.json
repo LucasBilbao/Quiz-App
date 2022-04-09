@@ -247,6 +247,11 @@
       },
       "scoreHistory": [
         {
+          "score": 1,
+          "maxScore": 1,
+          "date": "2022-04-09T07:43:17.573Z"
+        },
+        {
           "score": 2,
           "maxScore": 2,
           "date": "2022-04-08T15:32:59.325Z"

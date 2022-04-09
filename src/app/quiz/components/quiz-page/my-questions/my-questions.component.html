@@ -3,24 +3,37 @@
     <app-loader></app-loader>
   </div>
   <ng-template #questionCards>
-    <mat-card
-      class="question-card"
-      *ngFor="let question of questions; let i = index"
-      >{{ question.question }}
-      <div class="buttons">
-        <button matSuffix mat-icon-button aria-label="Edit" color="primary"
-        [routerLink]="routerLink(question.id)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button matSuffix mat-icon-button aria-label="Delete">
-          <mat-icon [matMenuTriggerFor]="delete" color="warn">delete</mat-icon>
-          <mat-menu #delete="matMenu">
-            <button mat-menu-item (click)="onDeleteQuestion(question.id, i)">
-              Delete
-            </button>
-          </mat-menu>
-        </button>
-      </div>
-    </mat-card>
+    <h1 *ngIf="questions.length === 0; else myQuestions" class="no-questions">
+      There are no questions
+    </h1>
+
+    <ng-template #myQuestions>
+      <mat-card
+        class="question-card"
+        *ngFor="let question of questions; let i = index"
+        >{{ question.question }}
+        <div class="buttons">
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Edit"
+            color="primary"
+            [routerLink]="routerLink(question.id)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button matSuffix mat-icon-button aria-label="Delete">
+            <mat-icon [matMenuTriggerFor]="delete" color="warn"
+              >delete</mat-icon
+            >
+            <mat-menu #delete="matMenu">
+              <button mat-menu-item (click)="onDeleteQuestion(question.id, i)">
+                Delete
+              </button>
+            </mat-menu>
+          </button>
+        </div>
+      </mat-card>
+    </ng-template>
   </ng-template>
 </div>

@@ -30,6 +30,11 @@
   }
 }
 
+.no-questions {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 451px) {
   .my-question-wrapper {
     justify-content: start;
