@@ -13,6 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { duplicateOptions } from 'src/app/quiz/assets/validators/duplicate-options.validator';
+import { SnackBarService } from 'src/app/shared/services/snack-bar/snack-bar.service';
 
 @Component({
   selector: 'app-create-question-card',
@@ -33,7 +34,7 @@ export class CreateQuestionCardComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private _snackBar: MatSnackBar,
+    private snackBar: SnackBarService,
     private fb: FormBuilder,
     private quizService: QuizService
   ) {}
@@ -100,12 +101,6 @@ export class CreateQuestionCardComponent implements OnInit {
     this.router.navigate(['/quiz']);
   }
 
-  openSnackBar(message: string): void {
-    this._snackBar.open(message, '', {
-      duration: 3000,
-    });
-  }
-
   removeOptionOn(index: number): void {
     this.options.removeAt(index);
     if (index === this.answerIndex) this.answerIndex--;
@@ -118,13 +113,13 @@ export class CreateQuestionCardComponent implements OnInit {
 
   putQuestion(): void {
     this.quizServices.putQuestion(this.createQuestion()).subscribe(() => {
-      this.openSnackBar('Question posted successfully');
+      this.snackBar.openSnackBar('Question posted successfully', 3000);
     });
   }
 
   postQuestion(): void {
     this.quizServices.postNewQuestion(this.createQuestion()).subscribe(() => {
-      this.openSnackBar('Question posted successfully');
+      this.snackBar.openSnackBar('Question posted successfully', 3000);
     });
   }
 
@@ -141,7 +136,7 @@ export class CreateQuestionCardComponent implements OnInit {
     this.quizService.deleteQuestion(id);
     this.userService.deleteQuestionID(id);
 
-    this.openSnackBar('Question deleted');
+    this.snackBar.openSnackBar('Question deleted', 3000);
 
     this.router.navigate(['/my-questions']);
   }

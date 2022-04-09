@@ -17,6 +17,7 @@ import { HistoryComponent } from './components/quiz-page/history/history.compone
 import { SignInComponent } from './components/quiz-page/sign-in/sign-in.component';
 import { MyQuestionsComponent } from './components/quiz-page/my-questions/my-questions.component';
 import { QuestionListComponent } from './components/quiz-page/question-list/question-list.component';
+import { InputPasswordErrorsComponent } from './components/quiz-page/sign-up/input-password-errors/input-password-errors.component';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -29,12 +30,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // My Modules
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
-import { InputPasswordErrorsComponent } from './components/quiz-page/sign-up/input-password-errors/input-password-errors.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +68,6 @@ import { InputPasswordErrorsComponent } from './components/quiz-page/sign-up/inp
     MatRadioModule,
     MatTableModule,
     SharedModule,
-    MatSnackBarModule,
   ],
   exports: [QuizPageComponent],
 })
