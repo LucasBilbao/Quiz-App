@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';

@@ -73,6 +73,11 @@
       },
       "scoreHistory": [
         {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-09T17:20:48.831Z"
+        },
+        {
           "score": 1,
           "maxScore": 5,
           "date": "2022-04-05T13:05:41.960Z"
@@ -115,6 +120,11 @@
         "password": "lukas123456"
       },
       "scoreHistory": [
+        {
+          "score": 1,
+          "maxScore": 1,
+          "date": "2022-04-09T17:54:07.608Z"
+        },
         {
           "score": 2,
           "maxScore": 3,

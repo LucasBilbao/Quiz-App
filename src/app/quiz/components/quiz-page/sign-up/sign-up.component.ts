@@ -1,27 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   passwordValuesAreEqual,
   strongPassword,
 } from 'src/app/quiz/assets/validators/password.validator';
 import { getUsernameExistenceValidator } from 'src/app/quiz/assets/validators/username.validator';
 import { UserService } from 'src/app/quiz/services/user/user.service';
-import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
   userForm: FormGroup = new FormGroup(
     {
       name: new FormControl(
@@ -39,9 +30,7 @@ export class SignUpComponent implements OnInit {
 
   hidePassword = true;
 
-  constructor(private userService: UserService, private router: Router) {}
-
-  ngOnInit(): void {}
+  constructor(private userService: UserService) {}
 
   async onSubmit(): Promise<void> {
     this.userService.onRegister({
