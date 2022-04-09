@@ -1,24 +1,21 @@
 <div class="sign-in-wrapper">
-  <form class="example-form" action="submit" (submit)="signIn()">
+  <form
+    class="example-form"
+    action="submit"
+    (submit)="signIn()"
+    [formGroup]="userForm"
+  >
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Username</mat-label>
       <input
         type="username"
         matInput
-        [formControl]="usernameFormControl"
+        formControlName="name"
         placeholder="Ex. JohnDoe"
         autocomplete="off"
+        (input)="onInput()"
       />
-      <mat-hint>Errors appear instantly!</mat-hint>
-      <mat-error
-        *ngIf="
-          usernameFormControl.hasError('email') &&
-          !usernameFormControl.hasError('required')
-        "
-      >
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="usernameFormControl.hasError('required')">
+      <mat-error *ngIf="userForm.get('name')?.hasError('required')">
         Username is <strong>required</strong>
       </mat-error>
     </mat-form-field>
@@ -29,8 +26,12 @@
         matInput
         [type]="hidePassword ? 'password' : 'text'"
         autocomplete="off"
-        [formControl]="passwordFormControl"
+        (input)="onInput()"
+        formControlName="password"
       />
+      <mat-error *ngIf="userForm.get('password')?.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
       <button
         mat-icon-button
         matSuffix
@@ -44,6 +45,13 @@
       </button>
     </mat-form-field>
 
-    <button type="submit" mat-button color="accent" class="sign-in-btn">Sign In</button>
+    <button type="submit" mat-button color="accent" class="sign-in-btn">
+      Sign In
+    </button>
+    <mat-error
+      *ngIf="userForm.hasError('incorrectCredentials') && hasTriedToSignIn"
+    >
+      Username or Password is wrong.
+    </mat-error>
   </form>
 </div>
