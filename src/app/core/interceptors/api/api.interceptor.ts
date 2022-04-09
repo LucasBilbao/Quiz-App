@@ -10,7 +10,7 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  URL: string = 'http://localhost:3000';
+  URL: string = 'https://my-fake-api-server.herokuapp.com';
 
   constructor() {}
 
