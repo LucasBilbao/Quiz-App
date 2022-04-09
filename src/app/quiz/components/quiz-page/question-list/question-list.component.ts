@@ -42,11 +42,9 @@ export class QuestionListComponent implements OnInit {
   }
 
   removeQuestion(id: string): void {
-    const index: number = this.chosenQuestions.findIndex(
-      (question) => question.id === id
+    this.chosenQuestions = this.chosenQuestions.filter(
+      (question) => question.id !== id
     );
-
-    this.chosenQuestions.splice(index, 1);
   }
 
   onSelectAll(): void {

@@ -145,9 +145,7 @@ export class UserService {
   }
 
   deleteQuestionID(id: string): void {
-    const index: number = this.user.myQuestions.findIndex((qID) => qID === id);
-
-    this.user.myQuestions.splice(index, 1);
+    this.user.myQuestions = this.user.myQuestions.filter((qID) => qID !== id);
 
     this.http.put(`${this.url}/${this.user.id}`, this.user).subscribe();
   }
