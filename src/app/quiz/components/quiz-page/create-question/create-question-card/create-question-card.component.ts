@@ -12,6 +12,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { duplicateOptions } from 'src/app/quiz/assets/validators/duplicate-options.validator';
 
 @Component({
   selector: 'app-create-question-card',
@@ -33,7 +34,8 @@ export class CreateQuestionCardComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private _snackBar: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private quizService: QuizService
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +62,7 @@ export class CreateQuestionCardComponent implements OnInit {
       id: [question.id, Validators.required],
       question: [question.question, Validators.required],
       answer: [question.answer, Validators.required],
-      options: this.fb.array([]),
+      options: this.fb.array([], [duplicateOptions]),
     });
 
     question.options.forEach((option, index) => {
@@ -98,8 +100,8 @@ export class CreateQuestionCardComponent implements OnInit {
     this.router.navigate(['/quiz']);
   }
 
-  openSnackBar(): void {
-    this._snackBar.open('Question posted successfully', '', {
+  openSnackBar(message: string): void {
+    this._snackBar.open(message, '', {
       duration: 3000,
     });
   }
@@ -116,13 +118,13 @@ export class CreateQuestionCardComponent implements OnInit {
 
   putQuestion(): void {
     this.quizServices.putQuestion(this.createQuestion()).subscribe(() => {
-      this.openSnackBar();
+      this.openSnackBar('Question posted successfully');
     });
   }
 
   postQuestion(): void {
     this.quizServices.postNewQuestion(this.createQuestion()).subscribe(() => {
-      this.openSnackBar();
+      this.openSnackBar('Question posted successfully');
     });
   }
 
@@ -133,5 +135,14 @@ export class CreateQuestionCardComponent implements OnInit {
       answer: this.questionForm.get('answer')?.value,
       options: this.options.value,
     };
+  }
+
+  onDeleteQuestion(id: string): void {
+    this.quizService.deleteQuestion(id);
+    this.userService.deleteQuestionID(id);
+
+    this.openSnackBar('Question deleted');
+
+    this.router.navigate(['/my-questions']);
   }
 }
