@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getUniqueID } from 'src/app/quiz/assets/getUniqueID';
+import { getUniqueID } from 'src/app/quiz/utils/getUniqueID';
 import { Question } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { UserService } from 'src/app/quiz/services/user/user.service';
@@ -11,7 +11,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { duplicateOptions } from 'src/app/quiz/assets/validators/duplicate-options.validator';
+import { duplicateOptions } from 'src/app/quiz/utils/validators/duplicate-options.validator';
 import { SnackBarService } from 'src/app/shared/services/snack-bar/snack-bar.service';
 
 @Component({

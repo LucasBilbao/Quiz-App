@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { userCredentialsCheck } from 'src/app/quiz/assets/validators/user-sign-in.validator';
+import { userCredentialsCheck } from 'src/app/quiz/utils/validators/user-sign-in.validator';
 import { UserCredentials } from 'src/app/quiz/models/user.model';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 

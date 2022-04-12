@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   passwordValuesAreEqual,
   strongPassword,
-} from 'src/app/quiz/assets/validators/password.validator';
-import { getUsernameExistenceValidator } from 'src/app/quiz/assets/validators/username.validator';
+} from 'src/app/quiz/utils/validators/password.validator';
+import { getUsernameExistenceValidator } from 'src/app/quiz/utils/validators/username.validator';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 
 @Component({
