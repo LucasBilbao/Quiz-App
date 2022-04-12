@@ -8,8 +8,8 @@ import {
 } from '@angular/animations';
 
 export const shake = trigger('shake', [
-  state('falseShake', style({ transform: 'translateX(0)' })),
-  transition('* => falseShake', [
+  state('positionShake', style({ transform: 'translateX(0)' })),
+  transition('* => positionShake', [
     animate(
       '500ms',
       keyframes([
@@ -20,8 +20,8 @@ export const shake = trigger('shake', [
       ])
     ),
   ]),
-  state('trueShake', style({ transform: 'scale(100%)' })),
-  transition('* => trueShake', [
+  state('scaleShake', style({ transform: 'scale(100%)' })),
+  transition('* => scaleShake', [
     animate(
       '500ms',
       keyframes([
