@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Question } from '../../models/question.model';
+import { delay, Observable, of } from 'rxjs';
+import { QuizItem } from '../../models/question.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,37 +9,29 @@ import { Question } from '../../models/question.model';
 export class QuizService {
   url: string = 'questions';
 
-  questions!: Question[];
+  quizItems!: QuizItem[];
 
   score: number = 0;
 
   constructor(private http: HttpClient) {}
 
-  async fetchQuestions(): Promise<Question[]> {
-    this.http.get<Question[]>(this.url).subscribe((questions) => {
-      this.questions = questions;
-    });
-
-    return new Promise((res) => {
-      setTimeout(() => {
-        res(this.questions);
-      }, 500);
-    });
+  fetchQuestions(): Observable<QuizItem[]> {
+    return this.http.get<QuizItem[]>(this.url).pipe(delay(500));
   }
 
-  getShuffledQuestions(): Question[] {
-    return this.questions.sort(() => Math.random() - 0.5);
+  getShuffledQuestions(quizItems: QuizItem[]): QuizItem[] {
+    return quizItems.sort(() => Math.random() - 0.5);
   }
 
-  postNewQuestion(question: Question): Observable<Question> {
-    return this.http.post<Question>(this.url, question);
+  postNewQuestion(quizItem: QuizItem): Observable<QuizItem> {
+    return this.http.post<QuizItem>(this.url, quizItem);
   }
 
-  putQuestion(question: Question): Observable<Question> {
-    return this.http.put<Question>(`${this.url}/${question.id}`, question);
+  putQuestion(quizItem: QuizItem): Observable<QuizItem> {
+    return this.http.put<QuizItem>(`${this.url}/${quizItem.id}`, quizItem);
   }
 
-  fetchQuestionsByIDs(ids: string[]): Observable<Question[]> {
+  fetchQuestionsByIDs(ids: string[]): Observable<QuizItem[]> {
     if (ids.length === 0) return of([]);
 
     let fetchURL: string = this.url;
@@ -54,7 +46,7 @@ export class QuizService {
       }
     });
 
-    return this.http.get<Question[]>(`${fetchURL}`);
+    return this.http.get<QuizItem[]>(`${fetchURL}`);
   }
 
   deleteQuestion(id: string): void {

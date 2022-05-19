@@ -20,13 +20,13 @@
 
     <button
       mat-flat-button
-      *ngFor="let question of questions"
-      [class.chosen]="isChosen(question)"
+      *ngFor="let quizItem of quizItems"
+      [class.chosen]="isChosen(quizItem)"
       (click)="
-        isChosen(question) ? removeQuestion(question.id) : addQuestion(question)
+        isChosen(quizItem) ? removeQuestion(quizItem.id) : addQuestion(quizItem)
       "
     >
-      {{ question.question }}
+      {{ quizItem.question }}
     </button>
 
     <hr />
@@ -37,7 +37,7 @@
     <button
       mat-flat-button
       color="primary"
-      [disabled]="chosenQuestions.length === 0"
+      [disabled]="!chosenQuestions.length"
       (click)="onStartGame()"
     >
       Start The Game

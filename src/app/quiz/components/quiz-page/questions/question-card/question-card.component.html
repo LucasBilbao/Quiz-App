@@ -4,15 +4,15 @@
 >
   <mat-card-title class="question">
     <h1>
-      {{ question.question }}
+      {{ quizItem.question }}
     </h1>
   </mat-card-title>
   <mat-card-content>
     <app-options
-      [options]="question.options"
-      [indexChecked]="indexChecked"
-      [correctIndex]="question.options.indexOf(question.answer)"
+      [options]="quizItem.options"
+      [answer]="quizItem.answer"
       [isAnswerShown]="isAnswerShown"
+      (updateIsCorrectChecked)="onUpdateIsCorrectChecked($event)"
       (optionClicked)="updateIndexChecked($event)"
     ></app-options>
   </mat-card-content>

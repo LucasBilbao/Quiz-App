@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Question } from 'src/app/quiz/models/question.model';
+import { QuizItem } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { slide } from 'src/app/quiz/animations/slide.trigger';
 
@@ -10,22 +10,24 @@ import { slide } from 'src/app/quiz/animations/slide.trigger';
   animations: [slide],
 })
 export class QuestionCardComponent {
-  @Input() question!: Question;
+  @Input() quizItem!: QuizItem;
   @Output() nextQuestion = new EventEmitter<void>();
   @Output() updateProgressCircle = new EventEmitter<boolean>();
 
-  indexChecked: number = -1;
+  isAnythingChecked: boolean = false;
 
   isAnswerShown: boolean = false;
 
   isQuestionChanging: boolean = false;
+
+  isCorrectChecked: boolean = false;
 
   constructor(private quizServices: QuizService) {}
 
   onNextClick(): void {
     this.isAnswerShown = true;
 
-    this.updateProgressCircle.emit(this.isCorrectChecked());
+    this.updateProgressCircle.emit(this.isCorrectChecked);
 
     this.resetOptions();
 
@@ -39,7 +41,7 @@ export class QuestionCardComponent {
   resetOptions(): void {
     setTimeout(() => {
       this.isAnswerShown = false;
-      this.indexChecked = -1;
+      this.isAnythingChecked = false;
     }, 4000);
   }
 
@@ -58,25 +60,23 @@ export class QuestionCardComponent {
     }, 4500);
   }
 
-  updateIndexChecked(index: number): void {
-    this.indexChecked = index;
+  updateIndexChecked(isAnythingChecked: boolean): void {
+    this.isAnythingChecked = isAnythingChecked;
   }
 
   passCorrectIndex(): number {
-    return this.question.options.indexOf(this.question.answer);
-  }
-
-  isCorrectChecked(): boolean {
-    return (
-      this.indexChecked === this.question.options.indexOf(this.question.answer)
-    );
+    return this.quizItem.options.indexOf(this.quizItem.answer);
   }
 
   updateScore(): void {
-    if (this.isCorrectChecked()) this.quizServices.score += 1;
+    if (this.isCorrectChecked) this.quizServices.score += 1;
   }
 
   isNextButtonDisabled(): boolean {
-    return this.indexChecked === -1 || this.isAnswerShown;
+    return !this.isAnythingChecked || this.isAnswerShown;
+  }
+
+  onUpdateIsCorrectChecked(isCorrectCheckedUpdated: boolean): void {
+    this.isCorrectChecked = isCorrectCheckedUpdated;
   }
 }

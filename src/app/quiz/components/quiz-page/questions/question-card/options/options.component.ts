@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { shake } from 'src/app/quiz/animations/shake.trigger';
 
 @Component({
@@ -7,17 +15,30 @@ import { shake } from 'src/app/quiz/animations/shake.trigger';
   styleUrls: ['./options.component.scss'],
   animations: [shake],
 })
-export class OptionsComponent {
+export class OptionsComponent implements OnChanges {
   @Input() options: string[] = [];
-  @Input() indexChecked: number = -1;
-  @Input() correctIndex: number = -1;
+  @Input() answer: string = '';
   @Input() isAnswerShown: boolean = false;
 
-  @Output() optionClicked = new EventEmitter<number>();
+  @Output() optionClicked = new EventEmitter<boolean>();
+  @Output() updateIsCorrectChecked = new EventEmitter<boolean>();
+
+  indexChecked: number = -1;
+
+  ngOnChanges(simpleChanges: SimpleChanges): void {
+    if (simpleChanges['answer']?.currentValue) {
+      this.indexChecked = -1;
+      this.options = [...this.options, this.answer].sort(
+        () => 0.5 - Math.random()
+      );
+    }
+  }
 
   onOptionClick(index: number): void {
     this.indexChecked = index;
-    this.optionClicked.emit(index);
+    this.optionClicked.emit(true);
+
+    this.updateIsCorrectChecked.emit(this.isCorrectSelected(index));
   }
 
   isChecked(index: number): boolean {
@@ -37,14 +58,10 @@ export class OptionsComponent {
   }
 
   isCorrectSelected(index: number): boolean {
-    return this.correctIndex === index;
+    return this.options[index] === this.answer;
   }
 
   isSelected(index: number): boolean {
     return this.indexChecked === index;
-  }
-
-  show(index: number): void {
-    console.log(this.isIncorrect(index));
   }
 }

@@ -1,4 +1,4 @@
-<div class="sign" *ngIf="!isSignedIn; else profile">
+<div class="sign" *ngIf="!localIsSignedIn; else profile">
   <button
     routerLink="sign-in"
     routerLinkActive="active"
@@ -32,6 +32,6 @@
       {{ username }}
     </button>
     <button mat-menu-item routerLink="my-questions">My Questions</button>
-    <button mat-menu-item (click)="logOut()">Log Out</button>
+    <button mat-menu-item (click)="onLogOut()">Log Out</button>
   </mat-menu>
 </ng-template>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 
 @Component({
@@ -7,12 +8,22 @@ import { UserService } from 'src/app/quiz/services/user/user.service';
   templateUrl: './start-quiz.component.html',
   styleUrls: ['./start-quiz.component.scss'],
 })
-export class StartQuizComponent implements OnInit {
+export class StartQuizComponent implements OnInit, OnDestroy {
+  isSignedInSubscription!: Subscription;
+
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    if (!this.userService.isSignedIn) {
-      this.router.navigate(['/sign-in']);
-    }
+    this.isSignedInSubscription = this.userService
+      .isSignedIn()
+      .subscribe((isSignedIn) => {
+        if (!isSignedIn) {
+          this.router.navigate(['/sign-in']);
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.isSignedInSubscription.unsubscribe();
   }
 }

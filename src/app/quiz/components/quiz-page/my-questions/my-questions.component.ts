@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Question } from 'src/app/quiz/models/question.model';
+import { Subscription } from 'rxjs';
+import { QuizItem } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar/snack-bar.service';
@@ -10,12 +11,14 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar/snack-bar.ser
   templateUrl: './my-questions.component.html',
   styleUrls: ['./my-questions.component.scss'],
 })
-export class MyQuestionsComponent implements OnInit {
+export class MyQuestionsComponent implements OnInit, OnDestroy {
   myQuestionIDs!: string[];
 
-  questions!: Question[];
+  quizItems!: QuizItem[];
 
   isLoading: boolean = true;
+
+  isSignedInSubscription!: Subscription;
 
   constructor(
     private userService: UserService,
@@ -25,21 +28,29 @@ export class MyQuestionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.userService.isSignedIn) {
-      this.router.navigate(['/sign-in']);
-    } else {
-      this.getData();
-    }
+    this.isSignedInSubscription = this.userService
+      .isSignedIn()
+      .subscribe((isSignedIn) => {
+        if (!isSignedIn) {
+          this.router.navigate(['/sign-in']);
+        } else {
+          this.getData();
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.isSignedInSubscription.unsubscribe();
   }
 
   getData(): void {
     if (!this.userService.user) {
       this.userService.fetchUserByID().then((user) => {
-        this.myQuestionIDs = user.myQuestions;
+        this.myQuestionIDs = user.questions;
         this.fetchQuestions();
       });
     } else {
-      this.myQuestionIDs = this.userService.user.myQuestions;
+      this.myQuestionIDs = this.userService.user.questions;
       this.fetchQuestions();
     }
   }
@@ -47,14 +58,14 @@ export class MyQuestionsComponent implements OnInit {
   fetchQuestions(): void {
     this.quizService
       .fetchQuestionsByIDs(this.myQuestionIDs)
-      .subscribe((questions: Question[]) => {
-        this.questions = questions;
+      .subscribe((questions: QuizItem[]) => {
+        this.quizItems = questions;
         this.isLoading = false;
       });
   }
 
   onDeleteQuestion(id: string, index: number): void {
-    this.questions.splice(index, 1);
+    this.quizItems.splice(index, 1);
 
     this.quizService.deleteQuestion(id);
     this.userService.deleteQuestionID(id);
@@ -62,7 +73,7 @@ export class MyQuestionsComponent implements OnInit {
     this.openSnackBar();
   }
 
-  routerLink(id: string): string {
+  getRouterLink(id: string): string {
     return `edit/${id}`;
   }
 

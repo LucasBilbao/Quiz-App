@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/quiz/services/user/user.service';
-import { Question } from '../../../models/question.model';
+import { QuizItem } from '../../../models/question.model';
 import { QuizService } from '../../../services/quiz/quiz.service';
 
 @Component({
@@ -9,16 +10,18 @@ import { QuizService } from '../../../services/quiz/quiz.service';
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss'],
 })
-export class QuestionsComponent implements OnInit {
-  questions: Question[] = [];
+export class QuestionsComponent implements OnInit, OnDestroy {
+  quizItems: QuizItem[] = [];
 
   progress: any = {};
 
-  currentQuestionIndex: number = 0;
+  currentQuizItemIndex: number = 0;
 
   isLoading: boolean = true;
 
   isGameOver: boolean = false;
+
+  isSignedInSubscription!: Subscription;
 
   constructor(
     private quizServices: QuizService,
@@ -27,26 +30,37 @@ export class QuestionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.userService.isSignedIn) {
-      this.router.navigate(['/sign-in']);
-    } else {
-      if (this.quizServices.questions) {
-        this.questions = this.quizServices.getShuffledQuestions();
-        this.isLoading = false;
-      } else {
-        this.quizServices.fetchQuestions().then((questions) => {
-          this.questions = this.quizServices.getShuffledQuestions();
-          this.isLoading = false;
-        });
-      }
-    }
+    this.isSignedInSubscription = this.userService
+      .isSignedIn()
+      .subscribe((isSignedIn) => {
+        if (!isSignedIn) {
+          this.router.navigate(['/sign-in']);
+        } else {
+          if (this.quizServices.quizItems) {
+            this.quizItems = this.quizServices.getShuffledQuestions(
+              this.quizServices.quizItems
+            );
+            this.isLoading = false;
+          } else {
+            this.quizServices.fetchQuestions().subscribe((questions) => {
+              this.quizItems =
+                this.quizServices.getShuffledQuestions(questions);
+              this.isLoading = false;
+            });
+          }
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.isSignedInSubscription.unsubscribe();
   }
 
   onNextClick(): void {
-    if (this.currentQuestionIndex !== this.questions.length - 1) {
-      this.currentQuestionIndex += 1;
+    if (this.currentQuizItemIndex !== this.quizItems.length - 1) {
+      this.currentQuizItemIndex += 1;
     } else {
-      this.currentQuestionIndex = 0;
+      this.currentQuizItemIndex = 0;
       this.gameOver();
     }
   }
@@ -62,10 +76,10 @@ export class QuestionsComponent implements OnInit {
       this.router.navigate(['/quiz']);
     }, 5000);
 
-    this.userService.putScore(this.getScore(), this.questions.length);
+    this.userService.putScore(this.getScore(), this.quizItems.length);
   }
 
   onUpdateProgressCircle(isCorrectlyAnswered: boolean): void {
-    this.progress[this.currentQuestionIndex] = isCorrectlyAnswered;
+    this.progress[this.currentQuizItemIndex] = isCorrectlyAnswered;
   }
 }

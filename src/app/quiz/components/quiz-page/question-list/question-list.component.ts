@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Question } from 'src/app/quiz/models/question.model';
+import { Subscription } from 'rxjs';
+import { QuizItem } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 
@@ -9,12 +10,14 @@ import { UserService } from 'src/app/quiz/services/user/user.service';
   templateUrl: './question-list.component.html',
   styleUrls: ['./question-list.component.scss'],
 })
-export class QuestionListComponent implements OnInit {
-  questions!: Question[];
+export class QuestionListComponent implements OnInit, OnDestroy {
+  quizItems!: QuizItem[];
 
   isLoading: boolean = true;
 
-  chosenQuestions: Question[] = [];
+  chosenQuestions: QuizItem[] = [];
+
+  isSignedInSubscription!: Subscription;
 
   constructor(
     private userService: UserService,
@@ -23,41 +26,49 @@ export class QuestionListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.userService.isSignedIn) {
-      this.router.navigate(['/sign-in']);
-    } else {
-      this.quizServices.fetchQuestions().then((questions) => {
-        this.questions = questions;
-        this.isLoading = false;
+    this.isSignedInSubscription = this.userService
+      .isSignedIn()
+      .subscribe((isSignedIn) => {
+        if (!isSignedIn) {
+          this.router.navigate(['/sign-in']);
+        } else {
+          this.quizServices.fetchQuestions().subscribe((quizItems) => {
+            this.quizItems = quizItems;
+            this.isLoading = false;
+          });
+        }
       });
-    }
   }
 
-  isChosen(question: Question): boolean {
-    return this.chosenQuestions.includes(question);
+  ngOnDestroy(): void {
+    this.isSignedInSubscription.unsubscribe();
   }
 
-  addQuestion(question: Question): void {
-    this.chosenQuestions.push(question);
+  isChosen(quizItem: QuizItem): boolean {
+    return this.chosenQuestions.includes(quizItem);
+  }
+
+  addQuestion(quizItem: QuizItem): void {
+    this.chosenQuestions.push(quizItem);
   }
 
   removeQuestion(id: string): void {
     this.chosenQuestions = this.chosenQuestions.filter(
-      (question) => question.id !== id
+      (quizItem) => quizItem.id !== id
     );
   }
 
   onSelectAll(): void {
     if (this.isEachQuestionChosen()) this.chosenQuestions = [];
-    else this.chosenQuestions = new Array(...this.questions);
+    else this.chosenQuestions = new Array(...this.quizItems);
   }
 
   isEachQuestionChosen(): boolean {
-    return this.chosenQuestions.length === this.questions.length;
+    return this.chosenQuestions.length === this.quizItems.length;
   }
 
   onStartGame(): void {
-    this.quizServices.questions = this.chosenQuestions;
+    this.quizServices.quizItems = this.chosenQuestions;
 
     this.router.navigate(['quiz', 'questions']);
   }

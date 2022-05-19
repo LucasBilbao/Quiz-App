@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { User, UserCredentials } from '../../models/user.model';
+import { User, Credentials } from '../../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { getUniqueID } from '../../utils/getUniqueID';
-import { Observable } from 'rxjs';
+import { debounce, debounceTime, interval, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,37 +12,40 @@ export class UserService {
 
   user!: User;
 
-  isSignedIn!: boolean;
-
   constructor(private http: HttpClient) {
-    if (localStorage.getItem('isSignedIn') === null) {
+    if (
+      localStorage.getItem('isSignedIn') === null ||
+      !localStorage.getItem('userID')
+    ) {
       this.changeIsSignedInStatus(false);
+    } else {
+      this.changeIsSignedInStatus(true);
     }
 
-    this.isSignedIn = localStorage.getItem('isSignedIn') === 'true';
-
-    if (this.isSignedIn) {
-      this.fetchUserByID();
-    }
-  }
-
-  onRegister(userCredentials: UserCredentials): void {
-    const userInfo: User = {
-      id: getUniqueID(),
-      userCredentials,
-      scoreHistory: [],
-      myQuestions: [],
-    };
-
-    this.http.post(this.url, userInfo).subscribe((user) => {
-      this.signIn(user as User);
+    this.isSignedIn().subscribe((isSignedIn) => {
+      if (isSignedIn) {
+        this.fetchUserByID();
+      }
     });
   }
 
-  async onSignIn(signInCredentials: UserCredentials): Promise<void> {
+  register(credentials: Credentials): void {
+    const userInfo: User = {
+      id: getUniqueID(),
+      credentials: credentials,
+      scoreHistory: [],
+      questions: [],
+    };
+
+    this.http.post(this.url, userInfo).subscribe((user) => {
+      this.authorize(user as User);
+    });
+  }
+
+  async signIn(signInCredentials: Credentials): Promise<void> {
     this.http
       .get<User[]>(
-        `${this.url}?userCredentials.username=${signInCredentials.username}`
+        `${this.url}?credentials.username=${signInCredentials.username}`
       )
       .subscribe((res) => {
         if (res.length !== 0) {
@@ -52,13 +55,13 @@ export class UserService {
           );
 
           if (user) {
-            this.signIn(user);
+            this.authorize(user);
           }
         }
       });
   }
 
-  onLogOut(): void {
+  logOut(): void {
     this.changeIsSignedInStatus(false);
 
     localStorage.removeItem('userID');
@@ -66,10 +69,10 @@ export class UserService {
     location.reload();
   }
 
-  signIn(user: User): void {
+  authorize(user: User): void {
     this.changeIsSignedInStatus(true);
 
-    if (localStorage.getItem('userID') === null && this.isSignedIn) {
+    if (!localStorage.getItem('userID') && this.isSignedIn) {
       localStorage.setItem('userID', user.id);
     }
 
@@ -84,7 +87,7 @@ export class UserService {
         ...this.user,
         scoreHistory: this.user.scoreHistory,
       })
-      .subscribe((user) => {});
+      .subscribe(() => {});
   }
 
   fetchUserByID(): Promise<User> {
@@ -102,51 +105,51 @@ export class UserService {
   }
 
   putQuestion(questionID: string): void {
-    this.user.myQuestions.unshift(questionID);
+    this.user.questions.unshift(questionID);
     this.http
       .put(`${this.url}/${this.user.id}`, {
         ...this.user,
-        myQuestions: this.user.myQuestions,
+        questions: this.user.questions,
       })
       .subscribe();
   }
 
   fetchUsersByUsername(username: string): Observable<User[]> {
     return this.http.get<User[]>(
-      `${this.url}?userCredentials.username=${username}`
-    );
+      `${this.url}?credentials.username=${username}`
+    ).pipe(debounce(() => interval(5000)));
   }
 
   changeIsSignedInStatus(status: boolean): void {
     localStorage.setItem('isSignedIn', `${status}`);
-    this.isSignedIn = status;
   }
 
   isEachCredentialCorrect(
-    userCredentials: UserCredentials,
-    signedCredentials: UserCredentials
+    credentials: Credentials,
+    signedCredentials: Credentials
   ): boolean {
     return (
-      userCredentials.username === signedCredentials.username &&
-      userCredentials.password === signedCredentials.password
+      credentials.username === signedCredentials.username &&
+      credentials.password === signedCredentials.password
     );
   }
 
   findUserByCredentials(
     users: User[],
-    signedCredentials: UserCredentials
+    signedCredentials: Credentials
   ): User | undefined {
     return users.find((user) => {
-      return this.isEachCredentialCorrect(
-        user.userCredentials,
-        signedCredentials
-      );
+      return this.isEachCredentialCorrect(user.credentials, signedCredentials);
     });
   }
 
   deleteQuestionID(id: string): void {
-    this.user.myQuestions = this.user.myQuestions.filter((qID) => qID !== id);
+    this.user.questions = this.user.questions.filter((qID) => qID !== id);
 
     this.http.put(`${this.url}/${this.user.id}`, this.user).subscribe();
+  }
+
+  isSignedIn(): Observable<boolean> {
+    return of(localStorage.getItem('isSignedIn') === 'true');
   }
 }

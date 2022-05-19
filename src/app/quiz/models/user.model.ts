@@ -1,10 +1,10 @@
-import { Question } from './question.model';
+import { QuizItem } from './question.model';
 
 export interface User {
   id: string;
-  userCredentials: UserCredentials;
+  credentials: Credentials;
   scoreHistory: ScoreInfo[];
-  myQuestions: string[];
+  questions: string[];
 }
 
 export interface ScoreInfo {
@@ -13,7 +13,7 @@ export interface ScoreInfo {
   date: Date;
 }
 
-export interface UserCredentials {
+export interface Credentials {
   username: string;
   password: string;
 }

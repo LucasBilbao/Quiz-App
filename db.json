@@ -6,7 +6,6 @@
       "answer": "False",
       "options": [
         "True",
-        "False",
         "It depends on the season"
       ]
     },
@@ -17,7 +16,6 @@
       "options": [
         "5",
         "12",
-        "10",
         "22"
       ]
     },
@@ -26,7 +24,6 @@
       "question": "What is the capital of France?",
       "answer": "Paris",
       "options": [
-        "Paris",
         "Marseille",
         "Lyon",
         "Toulouse"
@@ -38,7 +35,6 @@
       "answer": "Berlin",
       "options": [
         "Munich",
-        "Berlin",
         "Hamburg",
         "Frankfurt"
       ]
@@ -48,7 +44,6 @@
       "question": "Birds lay eggs.",
       "answer": "True",
       "options": [
-        "True",
         "False",
         "Sometimes"
       ]
@@ -58,7 +53,6 @@
       "question": "What color is the sky?",
       "answer": "Blue",
       "options": [
-        "Blue",
         "Yellow",
         "IDK"
       ]
@@ -67,7 +61,7 @@
   "users": [
     {
       "id": "1649061341572",
-      "userCredentials": {
+      "credentials": {
         "username": "LucasBilbao",
         "password": "lukas123456"
       },
@@ -108,18 +102,83 @@
           "date": "2022-04-05T06:39:35.110Z"
         }
       ],
-      "myQuestions": [
+      "questions": [
         "1649146923746",
         "1649139920133"
       ]
     },
     {
       "id": "1649069145173",
-      "userCredentials": {
+      "credentials": {
         "username": "Lucas.Bilbao",
         "password": "lukas123456"
       },
       "scoreHistory": [
+        {
+          "score": 1,
+          "maxScore": 3,
+          "date": "2022-04-13T13:20:39.109Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-13T13:20:09.073Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 1,
+          "date": "2022-04-13T13:19:46.148Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-13T10:57:32.764Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-13T10:33:23.076Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-13T09:55:32.978Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-12T10:08:19.822Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 1,
+          "date": "2022-04-12T08:53:15.969Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 3,
+          "date": "2022-04-12T08:42:07.800Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-12T08:41:28.471Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 6,
+          "date": "2022-04-12T08:40:36.600Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 1,
+          "date": "2022-04-12T07:54:29.968Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 1,
+          "date": "2022-04-12T07:24:29.694Z"
+        },
         {
           "score": 1,
           "maxScore": 1,
@@ -231,7 +290,12 @@
           "date": "2022-04-06T06:14:13.062Z"
         }
       ],
-      "myQuestions": [
+      "questions": [
+        "1649339457601",
+        "1649339457601",
+        "1649339457601",
+        "1649339457601",
+        "1649339457601",
         "1649339401482",
         "1649339401482",
         "1649339401482",
@@ -251,7 +315,7 @@
     },
     {
       "id": "1649431709776",
-      "userCredentials": {
+      "credentials": {
         "username": "LucasBilbao1",
         "password": "Lukas-12345"
       },
@@ -267,7 +331,7 @@
           "date": "2022-04-08T15:32:59.325Z"
         }
       ],
-      "myQuestions": []
+      "questions": []
     }
   ]
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { getUniqueID } from 'src/app/quiz/utils/getUniqueID';
-import { Question } from 'src/app/quiz/models/question.model';
+import { defaultQuizItem, QuizItem } from 'src/app/quiz/models/question.model';
 import { QuizService } from 'src/app/quiz/services/quiz/quiz.service';
 import { UserService } from 'src/app/quiz/services/user/user.service';
 import {
@@ -43,34 +43,28 @@ export class CreateQuestionCardComponent implements OnInit {
       if (params['id']) {
         this.quizServices
           .fetchQuestionsByIDs([params['id']])
-          .subscribe((questions) => {
-            this.prepareQuestionForm(questions[0]);
+          .subscribe((quizItems) => {
+            this.prepareQuestionForm(quizItems[0]);
             this.isEditing = true;
           });
       }
-      this.prepareQuestionForm({
-        id: getUniqueID(),
-        question: '',
-        answer: '',
-        options: ['', ''],
-      });
+      this.prepareQuestionForm(defaultQuizItem);
     });
   }
 
-  prepareQuestionForm(question: Question): void {
+  prepareQuestionForm(quizItem: QuizItem): void {
     this.questionForm = this.fb.group({
-      id: [question.id, Validators.required],
-      question: [question.question, Validators.required],
-      answer: [question.answer, Validators.required],
+      id: [quizItem.id, Validators.required],
+      question: [quizItem.question, Validators.required],
+      answer: [quizItem.answer, Validators.required],
       options: this.fb.array([], [duplicateOptions]),
     });
 
-    question.options.forEach((option, index) => {
-      this.addOption(option);
-      if (option === question.answer && option !== '') {
-        this.answerIndex = index;
-      }
-    });
+    quizItem.options.forEach((option) => this.addOption(option));
+
+    // add the answer to the options
+    this.addOption(quizItem.answer);
+    this.answerIndex = this.options.length - 1;
     this.isLoading = false;
   }
 
@@ -87,7 +81,11 @@ export class CreateQuestionCardComponent implements OnInit {
   }
 
   onSubmitQuestion(): void {
-    this.updateAnswerIndex(this.answerIndex);
+    this.questionForm.patchValue({
+      answer: this.options.at(this.answerIndex).value,
+    });
+
+    this.options.removeAt(this.answerIndex);
 
     if (this.isEditing) {
       this.putQuestion();
@@ -107,7 +105,6 @@ export class CreateQuestionCardComponent implements OnInit {
 
   updateAnswerIndex(index: number): void {
     this.answerIndex = index;
-    this.questionForm.patchValue({ answer: this.options.at(index).value });
   }
 
   putQuestion(): void {
@@ -122,7 +119,7 @@ export class CreateQuestionCardComponent implements OnInit {
     });
   }
 
-  createQuestion(): Question {
+  createQuestion(): QuizItem {
     return {
       id: this.questionForm.get('id')?.value,
       question: this.questionForm.get('question')?.value,
