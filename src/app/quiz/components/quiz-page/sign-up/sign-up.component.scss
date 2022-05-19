@@ -1,0 +1,31 @@
+.sign-up-wrapper {
+  display: flex;
+  justify-content: space-around;
+
+  width: 100%;
+  height: auto;
+
+  margin-top: 50px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  grid-gap: 20px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+@media screen and(max-width: 430px) {
+  .sign-up-wrapper {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,92 @@
+<div>
+  <app-loader *ngIf="isLoading; else createQuestion"></app-loader>
+
+  <ng-template #createQuestion>
+    <form class="question-creator-card" [formGroup]="questionForm">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Add a question</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. What color is the sky?"
+          autocomplete="off"
+          formControlName="question"
+        ></textarea>
+        <mat-error *ngIf="questionForm.get('question')?.hasError('required')">
+          Question is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <ng-container
+        formArrayName="options"
+        *ngFor="let optionControl of options.controls; let i = index"
+      >
+        <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>Option {{ i + 1 }}</mat-label>
+          <input
+            matInput
+            type="text"
+            autocomplete="off"
+            [formControlName]="i"
+          />
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="optionControl.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <button matSuffix mat-icon-button aria-label="Delete" *ngIf="i >= 2">
+            <mat-icon [matMenuTriggerFor]="delete">delete</mat-icon>
+            <mat-menu #delete="matMenu">
+              <button mat-menu-item (click)="removeOptionOn(i)">Delete</button>
+            </mat-menu>
+          </button>
+
+          <button
+            *ngIf="i !== answerIndex"
+            matSuffix
+            mat-icon-button
+            aria-label="Check"
+            (click)="updateAnswerIndex(i)"
+          >
+            <mat-icon>check</mat-icon>
+          </button>
+          <mat-error *ngIf="options.at(i)?.hasError('required')">
+            Option {{ i + 1 }} is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+      <mat-error *ngIf="options.hasError('hasDuplicates')">
+        <strong>No</strong> duplicates allowed.
+      </mat-error>
+
+      <button mat-flat-button (click)="addOption('')">+</button>
+
+      <h3>Correct Answer: {{ options.at(answerIndex)?.value }}</h3>
+      <mat-error *ngIf="questionForm.get('answer')?.hasError('required')">
+        Answer is <strong>required</strong>
+      </mat-error>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="!questionForm.valid"
+        (click)="onSubmitQuestion()"
+      >
+        Submit Question
+      </button>
+      <button mat-raised-button *ngIf="isEditing" [matMenuTriggerFor]="delete">
+        <mat-icon color="warn">delete</mat-icon>
+        <mat-menu #delete="matMenu">
+          <button
+            mat-menu-item
+            (click)="onDeleteQuestion(questionForm.get('id')?.value)"
+          >
+            Delete Question
+          </button>
+        </mat-menu>
+      </button>
+    </form>
+  </ng-template>
+</div>

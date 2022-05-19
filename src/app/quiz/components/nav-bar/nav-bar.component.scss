@@ -1,0 +1,41 @@
+.menu {
+  display: none;
+}
+
+.nav-bar-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 12px 12px 0px rgba(0, 0, 0, 0.1);
+
+  background-color: rgba(255, 255, 255, 0.144);
+
+  z-index: 1;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  min-width: 500px;
+
+  .nav-bar-btn.active {
+    opacity: 0.33;
+    pointer-events: none;
+  }
+}
+
+@media screen and(max-width:760px) {
+  .nav-bar {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+  }
+}
+
+@media screen and(max-width:360px) {
+  .nav-bar-card {
+    flex-direction: column-reverse;
+  }
+}

@@ -1,0 +1,36 @@
+<mat-card class="nav-bar-card">
+  <app-extendable-menu class="menu"></app-extendable-menu>
+
+  <div class="nav-bar">
+    <button
+      routerLink="quiz"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      mat-raised-button
+      class="nav-bar-btn"
+      color="accent"
+    >
+      Take quiz
+    </button>
+    <button
+      routerLink="create-question"
+      routerLinkActive="active"
+      class="nav-bar-btn"
+      mat-raised-button
+      color="accent"
+    >
+      Create Questions
+    </button>
+
+    <button
+      routerLink="history"
+      routerLinkActive="active"
+      mat-raised-button
+      class="nav-bar-btn"
+      color="accent"
+    >
+      History
+    </button>
+  </div>
+  <app-authorization></app-authorization>
+</mat-card>

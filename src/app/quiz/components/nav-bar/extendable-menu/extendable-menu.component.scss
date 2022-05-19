@@ -1,0 +1,20 @@
+.menu {
+  display: none;
+}
+
+.menu-item-btn.active {
+  color: rgba(0, 0, 0, 0.33) !important;
+  pointer-events: none !important;
+}
+
+@media screen and(max-width:760px) {
+  .menu {
+    display: flex;
+  }
+}
+
+@media screen and(max-width:360px) {
+  .menu {
+    margin-top: 2em !important;
+  }
+}

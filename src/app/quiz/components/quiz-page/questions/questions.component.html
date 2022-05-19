@@ -1,0 +1,45 @@
+<div class="question-wrapper">
+  <app-loader *ngIf="isLoading; else loaded"> </app-loader>
+
+  <ng-template #loaded>
+    <div *ngIf="quizItems.length !== 0; else noQuestions">
+      <div *ngIf="!isGameOver; else gameOver" class="questions">
+        <div class="progress">
+          <div
+            class="question-circle"
+            *ngFor="let _ of quizItems; let i = index"
+            [class.correct]="progress[i] && progress[i] !== undefined"
+            [class.incorrect]="!progress[i] && progress[i] !== undefined"
+            [class.active]="i === currentQuizItemIndex"
+          ></div>
+        </div>
+
+        <app-question-card
+          [quizItem]="quizItems[currentQuizItemIndex]"
+          class="question-card"
+          (nextQuestion)="onNextClick()"
+          (updateProgressCircle)="onUpdateProgressCircle($event)"
+        ></app-question-card>
+      </div>
+
+      <ng-template #gameOver>
+        <mat-card class="score-card">
+          <h1>
+            You have collected {{ getScore() }} /
+            {{ quizItems.length }}
+          </h1>
+          <h2 *ngIf="getScore() / quizItems.length >= 0.5; else tryAgain">
+            That is really good
+          </h2>
+          <ng-template #tryAgain>
+            <h2>You need to study more!</h2>
+          </ng-template>
+        </mat-card>
+      </ng-template>
+    </div>
+  </ng-template>
+
+  <ng-template #noQuestions>
+    <h1 class="no-questions">No questions available</h1>
+  </ng-template>
+</div>

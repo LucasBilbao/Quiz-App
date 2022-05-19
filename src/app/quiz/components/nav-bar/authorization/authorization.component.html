@@ -1,0 +1,37 @@
+<div class="sign" *ngIf="!localIsSignedIn; else profile">
+  <button
+    routerLink="sign-in"
+    routerLinkActive="active"
+    mat-flat-button
+    class="sign-in"
+  >
+    Sign in
+  </button>
+
+  <button
+    routerLink="sign-up"
+    routerLinkActive="active"
+    mat-flat-button
+    class="sign-up"
+  >
+    Sign up
+  </button>
+</div>
+
+<ng-template #profile>
+  <button
+    mat-fab
+    color="accent"
+    aria-label="Example icon button with a delete icon"
+    [matMenuTriggerFor]="profileMenu"
+  >
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item class="username-btn">
+      {{ username }}
+    </button>
+    <button mat-menu-item routerLink="my-questions">My Questions</button>
+    <button mat-menu-item (click)="onLogOut()">Log Out</button>
+  </mat-menu>
+</ng-template>

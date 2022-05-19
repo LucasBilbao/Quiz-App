@@ -1,0 +1,41 @@
+table {
+  width: auto;
+}
+
+.history-wrapper {
+  display: flex;
+  justify-content: space-around;
+
+  width: 100%;
+  height: auto;
+
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+.column {
+  text-align: center;
+}
+
+.column + .column {
+  padding-left: 24px;
+}
+
+@media screen and(max-width: 430px) {
+  .history-wrapper {
+    justify-content: flex-start;
+  }
+}
+
+@media screen and(min-width: 410px) {
+  table {
+    min-width: 370px;
+  }
+}

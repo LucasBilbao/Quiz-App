@@ -1,0 +1,30 @@
+<mat-card
+  class="question-card"
+  [@slide]="isQuestionChanging ? 'slideInAndOut' : ''"
+>
+  <mat-card-title class="question">
+    <h1>
+      {{ quizItem.question }}
+    </h1>
+  </mat-card-title>
+  <mat-card-content>
+    <app-options
+      [options]="quizItem.options"
+      [answer]="quizItem.answer"
+      [isAnswerShown]="isAnswerShown"
+      (updateIsCorrectChecked)="onUpdateIsCorrectChecked($event)"
+      (optionClicked)="updateIndexChecked($event)"
+    ></app-options>
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <button
+      mat-raised-button
+      color="accent"
+      class="next-btn"
+      (click)="onNextClick()"
+      [disabled]="isNextButtonDisabled()"
+    >
+      Next
+    </button>
+  </mat-card-actions>
+</mat-card>

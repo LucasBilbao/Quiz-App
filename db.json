@@ -1,0 +1,337 @@
+{
+  "questions": [
+    {
+      "id": "1649146923746",
+      "question": "The Earth is flat.",
+      "answer": "False",
+      "options": [
+        "True",
+        "It depends on the season"
+      ]
+    },
+    {
+      "id": "1649247474947",
+      "question": "How many fingers do people have?",
+      "answer": "10",
+      "options": [
+        "5",
+        "12",
+        "22"
+      ]
+    },
+    {
+      "id": "1649339401482",
+      "question": "What is the capital of France?",
+      "answer": "Paris",
+      "options": [
+        "Marseille",
+        "Lyon",
+        "Toulouse"
+      ]
+    },
+    {
+      "id": "1649339457601",
+      "question": "What is the capital of Germany?",
+      "answer": "Berlin",
+      "options": [
+        "Munich",
+        "Hamburg",
+        "Frankfurt"
+      ]
+    },
+    {
+      "id": "1649339501859",
+      "question": "Birds lay eggs.",
+      "answer": "True",
+      "options": [
+        "False",
+        "Sometimes"
+      ]
+    },
+    {
+      "id": "1649339531779",
+      "question": "What color is the sky?",
+      "answer": "Blue",
+      "options": [
+        "Yellow",
+        "IDK"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "1649061341572",
+      "credentials": {
+        "username": "LucasBilbao",
+        "password": "lukas123456"
+      },
+      "scoreHistory": [
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-09T17:20:48.831Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 5,
+          "date": "2022-04-05T13:05:41.960Z"
+        },
+        {
+          "score": 5,
+          "maxScore": 5,
+          "date": "2022-04-05T08:56:13.759Z"
+        },
+        {
+          "score": 3,
+          "maxScore": 5,
+          "date": "2022-04-05T08:24:02.296Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 4,
+          "date": "2022-04-05T08:18:03.902Z"
+        },
+        {
+          "score": 3,
+          "maxScore": 4,
+          "date": "2022-04-05T08:14:57.919Z"
+        },
+        {
+          "score": 4,
+          "maxScore": 4,
+          "date": "2022-04-05T06:39:35.110Z"
+        }
+      ],
+      "questions": [
+        "1649146923746",
+        "1649139920133"
+      ]
+    },
+    {
+      "id": "1649069145173",
+      "credentials": {
+        "username": "Lucas.Bilbao",
+        "password": "lukas123456"
+      },
+      "scoreHistory": [
+        {
+          "score": 1,
+          "maxScore": 3,
+          "date": "2022-04-13T13:20:39.109Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-13T13:20:09.073Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 1,
+          "date": "2022-04-13T13:19:46.148Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-13T10:57:32.764Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-13T10:33:23.076Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-13T09:55:32.978Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-12T10:08:19.822Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 1,
+          "date": "2022-04-12T08:53:15.969Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 3,
+          "date": "2022-04-12T08:42:07.800Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-12T08:41:28.471Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 6,
+          "date": "2022-04-12T08:40:36.600Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 1,
+          "date": "2022-04-12T07:54:29.968Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 1,
+          "date": "2022-04-12T07:24:29.694Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 1,
+          "date": "2022-04-09T17:54:07.608Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 3,
+          "date": "2022-04-07T18:52:06.026Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-07T18:47:48.095Z"
+        },
+        {
+          "score": 6,
+          "maxScore": 6,
+          "date": "2022-04-07T18:47:17.153Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-07T18:45:33.121Z"
+        },
+        {
+          "score": 6,
+          "maxScore": 6,
+          "date": "2022-04-07T17:32:51.503Z"
+        },
+        {
+          "score": 4,
+          "maxScore": 6,
+          "date": "2022-04-07T17:30:46.278Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-07T13:49:53.891Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 2,
+          "date": "2022-04-07T13:10:53.258Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 2,
+          "date": "2022-04-07T13:09:08.546Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 1,
+          "date": "2022-04-07T13:07:43.639Z"
+        },
+        {
+          "score": 3,
+          "maxScore": 6,
+          "date": "2022-04-07T10:20:34.340Z"
+        },
+        {
+          "score": 5,
+          "maxScore": 6,
+          "date": "2022-04-06T13:43:37.334Z"
+        },
+        {
+          "score": 6,
+          "maxScore": 6,
+          "date": "2022-04-06T12:19:36.492Z"
+        },
+        {
+          "score": 7,
+          "maxScore": 7,
+          "date": "2022-04-06T12:12:53.848Z"
+        },
+        {
+          "score": 3,
+          "maxScore": 5,
+          "date": "2022-04-06T10:28:06.033Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 5,
+          "date": "2022-04-06T10:05:48.543Z"
+        },
+        {
+          "score": 1,
+          "maxScore": 5,
+          "date": "2022-04-06T09:54:28.697Z"
+        },
+        {
+          "score": 3,
+          "maxScore": 5,
+          "date": "2022-04-06T08:29:38.953Z"
+        },
+        {
+          "score": 0,
+          "maxScore": 5,
+          "date": "2022-04-06T07:44:51.922Z"
+        },
+        {
+          "score": 4,
+          "maxScore": 5,
+          "date": "2022-04-06T06:18:32.015Z"
+        },
+        {
+          "score": 4,
+          "maxScore": 5,
+          "date": "2022-04-06T06:14:13.062Z"
+        }
+      ],
+      "questions": [
+        "1649339457601",
+        "1649339457601",
+        "1649339457601",
+        "1649339457601",
+        "1649339457601",
+        "1649339401482",
+        "1649339401482",
+        "1649339401482",
+        "1649339401482",
+        "1649339501859",
+        "1649339501859",
+        "1649339501859",
+        "1649339501859",
+        "1649339501859",
+        "1649339501859",
+        "1649339531779",
+        "1649339501859",
+        "1649339457601",
+        "1649339401482",
+        "1649337058369"
+      ]
+    },
+    {
+      "id": "1649431709776",
+      "credentials": {
+        "username": "LucasBilbao1",
+        "password": "Lukas-12345"
+      },
+      "scoreHistory": [
+        {
+          "score": 1,
+          "maxScore": 1,
+          "date": "2022-04-09T07:43:17.573Z"
+        },
+        {
+          "score": 2,
+          "maxScore": 2,
+          "date": "2022-04-08T15:32:59.325Z"
+        }
+      ],
+      "questions": []
+    }
+  ]
+}

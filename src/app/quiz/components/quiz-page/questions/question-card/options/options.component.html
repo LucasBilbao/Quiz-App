@@ -1,0 +1,19 @@
+<div class="radio-group">
+  <div
+    class="radio"
+    [class.correct]="isCorrect(i)"
+    [@shake]="isCorrect(i) ? 'scaleShake' : ''"
+    [class.incorrect]="isIncorrect(i)"
+    [@shake]="isIncorrect(i) ? 'positionShake' : ''"
+    *ngFor="let option of options; let i = index"
+    (click)="onOptionClick(i)"
+    [class.disabled-option]="isAnswerShown"
+  >
+    <label class="container">
+      <div class="checkmark">
+        <div class="check" *ngIf="isChecked(i)"></div>
+      </div>
+      {{ option }}
+    </label>
+  </div>
+</div>

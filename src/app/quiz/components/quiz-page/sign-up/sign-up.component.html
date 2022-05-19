@@ -1,0 +1,88 @@
+<div class="sign-up-wrapper">
+  <form
+    class="example-form"
+    action="submit"
+    (submit)="onSubmit()"
+    [formGroup]="userForm"
+  >
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input
+        type="username"
+        matInput
+        formControlName="name"
+        placeholder="Ex. JohnDoe"
+        autocomplete="off"
+      />
+      <mat-error *ngIf="userForm.get('name')?.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="userForm.get('name')?.hasError('usernameExists')">
+        Username <strong>already</strong> exists
+      </mat-error>
+      <mat-error *ngIf="userForm.get('name')?.errors?.['minlength']">
+        Username must be at least 5 characters long.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="password-field">
+      <mat-label>Enter new password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        autocomplete="off"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <app-input-password-errors
+      *ngIf="
+        userForm.get('password')?.errors && userForm.get('password')?.touched
+      "
+      [errors]="userForm.get('password')?.errors"
+    ></app-input-password-errors>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        autocomplete="off"
+        formControlName="confirmPassword"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-error *ngIf="userForm.errors?.['passwordValuesDoNotMatch']">
+      Passwords have to match
+    </mat-error>
+
+    <button
+      type="submit"
+      [disabled]="!userForm.valid"
+      mat-button
+      color="accent"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>

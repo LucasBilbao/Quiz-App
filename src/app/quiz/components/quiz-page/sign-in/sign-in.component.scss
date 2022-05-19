@@ -1,0 +1,35 @@
+.sign-in-wrapper {
+  display: flex;
+  justify-content: space-around;
+
+  width: 100%;
+  height: auto;
+
+  margin-top: 50px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.sign-in-btn {
+  height: 50px;
+}
+
+@media screen and(max-width: 430px) {
+  .sign-in-wrapper {
+    justify-content: flex-start;
+  }
+}
